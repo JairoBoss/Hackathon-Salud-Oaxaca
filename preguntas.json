@@ -1,0 +1,21 @@
+{
+  "Preguntas": [
+    {
+      "Pregunta": "¿Cúál es tu edad?",
+      "Respuestas": [
+        { "Respuesta": "<45", "Puntaje": 0 },
+        { "Respuesta": "45-54 años", "Puntaje": 2 },
+        { "Respuesta": "55-64 años", "Puntaje": 3 },
+        { "Respuesta": "<64", "Puntaje": 4 }
+      ]
+    },
+    {
+      "Pregunta": "¿Cúál es tu IMC?",
+      "Respuestas": [
+        { "Respuesta": "<25", "Puntaje": 0 },
+        { "Respuesta": "25-30 años", "Puntaje": 1 },
+        { "Respuesta": ">30", "Puntaje": 3 }
+      ]
+    }
+  ]
+}
