@@ -4,25 +4,27 @@ import MenuOpciones from "./menuOpciones";
 import { Link, Switch, BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import PublicLayout from "./components/Public/PublicLayout";
+import PrivateLayout from "./components/Private/PrivateLayout";
 import { AuthContext } from "./context/AuthContext";
 import { useContext, useEffect } from "react";
+
 
 function App() {
 
   const publicRoutes = (
-    <Routes>
-      <Route path="/" element={<div >Login</div>} />
-      <Route path="/registro" element={<div >Registro</div>} />
+
+    <Route element={<PublicLayout />}>
+      <Route index path="/login" element={<div >Login</div>} />
+      <Route path="/registrarse" element={<div >Registro</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
-    </Routes>
+    </Route>
+
   );
 
   const userRoutes = (
-    <Routes>
-      {/* <Route path="/" element={<Layout></Layout>}> */}
-      {/* Rutas publicas */}
-      {/* <Route element={<PublicLayout />}> */}
-      <Route path="/" element={<div>Inicio</div>} />
+
+    <Route element={<PrivateLayout />}>
+      <Route index path="/" element={<div>Inicio</div>} />
       <Route path="tablero" element={<div>Admin</div>} />
       <Route path="perfil" element={<div>Perfil</div>} />
       <Route path="diario" element={<div>Diario</div>} />
@@ -31,9 +33,8 @@ function App() {
       <Route path="*" element={<div>No encontrada</div>} />
       {/* Por si no existe la ruta */}
 
-      {/* </Route> */}
-      {/* </Route> */}
-    </Routes>
+
+    </Route>
   );
 
   const getRoutes = () => {
@@ -43,8 +44,12 @@ function App() {
   };
 
   return (
-    <BrowserRouter>      
-      {getRoutes()}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout></Layout>}>
+          {getRoutes()}
+        </Route>
+      </Routes>
     </BrowserRouter>
 
   );
