@@ -3,13 +3,14 @@ import {  BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import PublicLayout from "./components/Public/PublicLayout";
 import PrivateLayout from "./components/Private/PrivateLayout";
+import Login from "./components/Public/Login";
 
 
 function App() {
 
   const publicRoutes = (
     <Route element={<PublicLayout />}>
-      <Route index path="/login" element={<div >Login</div>} />
+      <Route index path="/login" element={<Login/>} />
       <Route path="/registrarse" element={<div >Registro</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
     </Route>
