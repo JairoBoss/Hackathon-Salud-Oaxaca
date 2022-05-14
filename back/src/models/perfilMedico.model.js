@@ -1,34 +1,48 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var PerfilMedicoSchema = new Schema({
   Usuario: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'Usuario'
+    ref: "Usuario",
   },
-  Enfermedades: [{
+  Enfermedades: [
+    {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Enfermedades",
+    },
+  ],
+  Medicamentos: [
+    {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Medicamentos",
+    },
+  ],
+  Documentos: [
+    {
+      type: String,
+    },
+  ],
+  Examenes: [{
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'Enfermedades'
+    ref: "Examenes",
   }],
-  Medicamentos: [{
+  Eventos: [
+    {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Eventos",
+    },
+  ],
+  Habito:{
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'Medicamentos'
-  }],
-  Documentos: [{
-    type: String
-  }],
-  Examenes: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Examenes'
-  },
-  Eventos: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Eventos'
+    ref: "Habito",
   }
+
 });
 
-module.exports = mongoose.model("PerfilMedico", PerfilMedicoSchema)
+module.exports = mongoose.model("PerfilMedico", PerfilMedicoSchema);

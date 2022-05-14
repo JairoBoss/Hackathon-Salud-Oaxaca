@@ -56,6 +56,7 @@ require("./src/routes/enfermedad.routes")(app)
 require("./src/routes/pregunta.routes")(app)
 require("./src/routes/examen.routes")(app)
 require("./src/routes/perfilMedico.routes")(app)
+require("./src/routes/habito.routes")(app)
 
 app.listen(PORT, () => {
   console.log(`Server en el puerto ${PORT}`);

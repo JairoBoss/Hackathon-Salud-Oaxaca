@@ -26,6 +26,7 @@ exports.create = async (req, res) => {
     Altura: req.body.Altura,
     Tipo_Sangre: req.body.Tipo_Sangre,
     Alergias: req.body.Alergias,
+    Donador: req.body.Donador,
     Correo: req.body.Correo,
     Contraseña: hasPassword
   });

@@ -49,6 +49,9 @@ const UsuarioSchema = mongoose.Schema({
   Tipo_Sangre: {
     type: String
   },
+  Donador: {
+    type: Boolean
+  },
   Alergias: [{
     type: String
   }],
