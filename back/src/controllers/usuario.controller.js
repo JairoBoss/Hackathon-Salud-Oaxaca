@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
       if (user) {
         const validPass = await bcrypt.compare(
           req.body.Contraseña,
-          user.Contraseña
+          user.Correo
         );
         if (!validPass)
           return res.status(401).send("Correo o contraseña incorrectas");
