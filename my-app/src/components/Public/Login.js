@@ -1,7 +1,7 @@
 import { SetStateAction, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import UserService from "../../Services/User.Service";
+import UserService from "../../services/User.Service";
 
 const Login = () => {
   const [email, setEmail] = useState("");

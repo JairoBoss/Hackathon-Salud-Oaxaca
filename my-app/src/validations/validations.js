@@ -8,7 +8,10 @@ export const isEmpty = (value) => {
 
 export const isValidEmail = (value) => {
   let error;
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+  if (
+    value !== "" &&
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+  ) {
     error = "Dirección de correo inválida";
   }
   return error;
@@ -16,8 +19,12 @@ export const isValidEmail = (value) => {
 
 export const isValidPhone = (value) => {
   let error;
-  if (!/^\d+$/.test(value)) {
+  if (value !== "" && !/^\d+$/.test(value)) {
     error = "Teléfono inválido";
   }
   return error;
+};
+
+export const isPositiveNumber = (value) => {
+  return value < 0;
 };
