@@ -1,24 +1,18 @@
-import logo from "./logo.svg";
 import "./App.css";
-import MenuOpciones from "./menuOpciones";
-import { Link, Switch, BrowserRouter, Route, Routes } from "react-router-dom";
+import {  BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import PublicLayout from "./components/Public/PublicLayout";
 import PrivateLayout from "./components/Private/PrivateLayout";
-import { AuthContext } from "./context/AuthContext";
-import { useContext, useEffect } from "react";
 
 
 function App() {
 
   const publicRoutes = (
-
     <Route element={<PublicLayout />}>
       <Route index path="/login" element={<div >Login</div>} />
       <Route path="/registrarse" element={<div >Registro</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
     </Route>
-
   );
 
   const userRoutes = (
@@ -32,8 +26,6 @@ function App() {
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
       {/* Por si no existe la ruta */}
-
-
     </Route>
   );
 
