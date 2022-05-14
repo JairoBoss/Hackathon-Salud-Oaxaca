@@ -4,12 +4,13 @@ import Layout from "./components/Layout";
 import PublicLayout from "./components/Public/PublicLayout";
 import PrivateLayout from "./components/Private/PrivateLayout";
 import Login from "./components/Public/Login";
+import Register from "./pages/Public/Register";
 
 function App() {
   const publicRoutes = (
     <Route element={<PublicLayout />}>
-      <Route index path="/" element={<Login/>} />
-      <Route path="/registrarse" element={<div>Registro</div>} />
+      <Route index path="/" element={<Login />} />
+      <Route path="/registrarse" element={<Register />} />
       <Route path="*" element={<div>No encontrada</div>} />
     </Route>
   );
