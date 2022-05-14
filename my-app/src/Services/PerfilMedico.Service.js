@@ -11,8 +11,8 @@ export default class PerfilMedicoService {
     return (await httpClient.post(`${prefix}`, user)).data;
   }
 
-  static async update(user) {
-    return (await httpClient.put(`${prefix}/${user.id}`, user)).data;
+  static async update(id,user) {
+    return (await httpClient.put(`${prefix}/${id}`, user)).data;
   }
 
   static async remove(id) {

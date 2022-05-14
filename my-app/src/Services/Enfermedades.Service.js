@@ -3,8 +3,8 @@ import httpClient from "./HttpClient";
 const prefix = "/enfermedad";
 
 export default class DiseaseService {
-  static async register(user) {
-    return (await httpClient.post(`${prefix}/`, user)).data;
+  static async register(enfermedad) {
+    return (await httpClient.post(`${prefix}/`, enfermedad)).data;
   }
 
   static async create(user) {

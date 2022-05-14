@@ -16,23 +16,20 @@ const Perfil = () => {
     const [user, setUser] = useState("");
 
     useEffect(() => {
+        let responseEnf = "";
+        loadProfile();
+    },[])
 
-        UserService.get("627efe5911ed44bc677b870e").then(response => {
-            setUser(response);
-            let imc = response.Peso / ((response.Altura / 100) * (response.Altura / 100));
-            setIMC(imc);
-            divReturn(imc);
-            PerfilMedicoService.getByUserId(response._id).then((response2) => {
-                setPerfil(response2[0]);
-                for (let i = 0; i < response2[0].Enfermedades.length; i++) {                    
-                    DiseaseService.get(response2[0].Enfermedades[i]).then((response4) => {                        
-                        enfermedades.push(response4);
-                        
-                    })
-                }
-            })
-        });
-    }, [])
+    const loadProfile = async () => {
+        const UserResponse = await UserService.get("628028d16b19388ded66f6be");
+        setUser(UserResponse);
+        let imc = UserResponse.Peso / ((UserResponse.Altura / 100) * (UserResponse.Altura / 100));
+        setIMC(imc);
+        divReturn(imc);
+        const ProfileResponse = await PerfilMedicoService.getByUserId(UserResponse._id)
+
+        setPerfil(ProfileResponse[0]);
+    }
 
     function divReturn(imc) {
         if (imc < 18.5) {
@@ -82,7 +79,7 @@ const Perfil = () => {
                                 Correo: {user.Correo}
                             </p>
                             <h5>
-                                IMC: {IMC}
+                                IMC: {Math.round(IMC, 3)}
                             </h5>
                             <div style={{ backgroundColor: color, borderRadius: "10px", height: "30px", textAlign: "center" }}>
                                 {text}
@@ -115,8 +112,8 @@ const Perfil = () => {
                     <div className="flex-grow-1">
                         <h1 className="font-700 mb-1">Alergias</h1>
                         {user.Alergias && user.Alergias.map((alergia, index) => (
-                            <div className="text-center mb-3">
-                                <p key={index} className="icon icon-xs rounded-sm shadow-l me-1" style={{ width: "60%", backgroundColor: "#8cc152", color: "white" }}>
+                            <div key={index} className="text-center mb-3">
+                                <p key={index + alergia} className="icon icon-xs rounded-sm shadow-l me-1" style={{ width: "60%", backgroundColor: "#8cc152", color: "white" }}>
                                     {alergia}
                                 </p>
                             </div>
@@ -127,22 +124,11 @@ const Perfil = () => {
             <div className="card card-style" style={{ marginTop: "10px" }}>
                 <div className="d-flex content">
                     <div className="flex-grow-1">
-                        <h1 className="font-700 mb-1">Enfermedades</h1>
-                        {enfermedades && enfermedades.map((enfermedad, index) => {
-                            let date = new Date(enfermedad.Fecha_Diagnostico)
-                            let año = date.getFullYear();
-
-                            return(
-                            <div className="text-center mb-3" key={index} >
-                                <p key={index+enfermedad.Nombre} className="icon icon-xs rounded-sm shadow-l me-1" style={{ width: "60%", backgroundColor: "#8cc152", color: "white" }}>
-                                    {enfermedad.Nombre}, Detectada el {año}
-                                </p>
-                            </div>
-                        )})}
+                        <h1 className="font-700 mb-1">Enfermedades</h1>                        
                         <div className="flex-grow-1">
                             <div className="text-center mb-3">
                                 <a href="/agregarEnfermedad" className="icon icon-xs rounded-sm shadow-l me-1 bg-phone" style={{ width: "80%" }}>
-                                    Agregar
+                                    Ver
                                 </a>
                             </div>
                         </div>
@@ -154,7 +140,7 @@ const Perfil = () => {
                     <div className="flex-grow-1">
                         <h1 className="font-700 mb-1">Ubicación</h1>
                         <p className="mb-0 pb-1 pe-3">
-                            Fecha de Nacimiento: {user.Fecha_Nacimiento}
+                            Fecha de Nacimiento: {new Date(user.Fecha_Nacimiento).toLocaleDateString()}
                         </p>
                         <p className="mb-0 pb-1 pe-3">
                             Lugar de Nacimiento: {user.Lugar_Nacimiento}

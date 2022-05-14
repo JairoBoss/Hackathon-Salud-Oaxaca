@@ -5,7 +5,7 @@ var EnfermedadSchema = new Schema({
     type: String
   },
   Fecha_Diagnostico: {
-    type: String
+    type: Date
   }
 });
 
