@@ -52,7 +52,7 @@ exports.create = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  Usuario.findOne({ correo: req.body.Correo }, async (err, user) => {
+  Usuario.findOne({ Correo: req.body.Correo }, async (err, user) => {
     console.log(user);
     if (err) {
       console.log(err);
