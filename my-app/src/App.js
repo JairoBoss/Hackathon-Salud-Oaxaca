@@ -1,13 +1,12 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import PublicLayout from "./components/Public/PublicLayout";
-import PrivateLayout from "./components/Private/PrivateLayout";
-import Login from "./components/Public/Login";
-import Perfil from "./components/Private/Perfil";
-import AddEnfermedad from "./components/Private/AddEnfermedad";
-import Register from "./pages/Public/Register";
-import Form1 from "./pages/Public/Register/Form1";
+import PublicLayout from "./components/public/PublicLayout";
+import PrivateLayout from "./components/private/PrivateLayout";
+import Login from "./components/public/Login";
+import Perfil from "./components/private/Perfil";
+import AddEnfermedad from "./components/private/AddEnfermedad";
+import Register from "./pages/public/Register";
 
 function App() {
   const publicRoutes = (
@@ -21,8 +20,8 @@ function App() {
   const userRoutes = (
     <Route element={<PrivateLayout />}>
       <Route index path="/" element={<div>Inicio</div>} />
-      <Route index path="/agregarEnfermedad" element={<AddEnfermedad/>} />
-      <Route path="/perfil" element={<Perfil/>} />
+      <Route index path="/agregarEnfermedad" element={<AddEnfermedad />} />
+      <Route path="/perfil" element={<Perfil />} />
       <Route path="/diario" element={<div>Diario</div>} />
       <Route path="/examenes" element={<div>Examenes</div>} />
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
