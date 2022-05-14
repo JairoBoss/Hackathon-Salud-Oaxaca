@@ -1,22 +1,21 @@
 import { SetStateAction, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import UserService from "../../Services/User.Service";
+import UserService from "../../services/User.Service";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [loading, setLoading] = useState(false);
-  let navigate = useNavigate();  
+  let navigate = useNavigate();
 
   require("./Login.css");
 
   const onChangeEmail = (event) => setEmail(event.target.value);
-  const onChangePwd = (event) =>
-    setPwd(event.target.value);
+  const onChangePwd = (event) => setPwd(event.target.value);
 
   const iniciarSesion = async () => {
-    if (email && pwd) {      
+    if (email && pwd) {
       const data = {
         pwd: pwd,
         email: email,
@@ -27,10 +26,10 @@ const Login = () => {
           if (response === "Credenciales Incorrectas") {
             console.log(response);
             toast.error("Error al intentar ingresar, revise sus credenciales");
-          } else {            
+          } else {
             localStorage.setItem("currentUser", JSON.stringify(response.user));
-            localStorage.setItem("token", response.token);            
-            toast.success("Bienvenid@ "+response.user.nombre);
+            localStorage.setItem("token", response.token);
+            toast.success("Bienvenid@ " + response.user.nombre);
             navigate("/");
           }
         });
@@ -113,9 +112,7 @@ const Login = () => {
             </div>
           </div>
 
-          <div
-            className="login100-more"            
-          ></div>
+          <div className="login100-more"></div>
         </div>
       </div>
     </div>

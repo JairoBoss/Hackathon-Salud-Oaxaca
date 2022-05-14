@@ -1,9 +1,9 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import PublicLayout from "./components/Public/PublicLayout";
-import PrivateLayout from "./components/Private/PrivateLayout";
-import Login from "./components/Public/Login";
+import PublicLayout from "./components/public/PublicLayout";
+import PrivateLayout from "./components/private/PrivateLayout";
+import Login from "./components/public/Login";
 import Register from "./pages/Public/Register";
 
 function App() {
