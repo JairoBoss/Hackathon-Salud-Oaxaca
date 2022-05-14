@@ -1,22 +1,19 @@
 import "./App.css";
-import {  BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import PublicLayout from "./components/Public/PublicLayout";
 import PrivateLayout from "./components/Private/PrivateLayout";
 
-
 function App() {
-
   const publicRoutes = (
     <Route element={<PublicLayout />}>
-      <Route index path="/login" element={<div >Login</div>} />
-      <Route path="/registrarse" element={<div >Registro</div>} />
+      <Route index path="/" element={<div>Login</div>} />
+      <Route path="/registrarse" element={<div>Registro</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
     </Route>
   );
 
   const userRoutes = (
-
     <Route element={<PrivateLayout />}>
       <Route index path="/" element={<div>Inicio</div>} />
       <Route path="tablero" element={<div>Admin</div>} />
@@ -43,7 +40,6 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-
   );
 }
 
