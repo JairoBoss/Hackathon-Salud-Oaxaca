@@ -111,3 +111,25 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+exports.findByUserId = (req, res) => {
+  PerfilMedico.find({Usuario: req.body.id})
+    .then((data) => {
+      if (!data) {
+        return res.status(404).send({
+          message: `Perfil medico con id: ${req.params.id} no encontrado`,
+        });
+      }
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: `Perfil medico con id: ${req.params.id} no encontrado`,
+        });
+      }
+      return res.status(500).send({
+        message: `Error al recuperar datos del perfil medico con id: ${req.params.id}.`,
+      });
+    });
+};

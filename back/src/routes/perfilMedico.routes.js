@@ -9,6 +9,8 @@ module.exports = (app) => {
 
   router.get("/:id", verifyUserToken, PerfilMedicoController.findOne);
 
+  router.get("/usuario/:id", verifyUserToken, PerfilMedicoController.findByUserId);
+
   router.put("/:id", verifyUserToken, PerfilMedicoController.update);
 
   router.delete("/:id", verifyUserToken, PerfilMedicoController.delete);
