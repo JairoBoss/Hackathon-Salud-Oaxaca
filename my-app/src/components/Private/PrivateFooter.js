@@ -1,6 +1,6 @@
 import React from "react";
 
-const Footer = () => {
+const PrivateFooter = () => {
   return (
     <div id="page" data-swup={0} className="device-is-ios">
       <div id="footer-bar" className="footer-bar-1">
@@ -37,4 +37,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default PrivateFooter;

@@ -1,11 +1,11 @@
+import logo from "./logo.svg";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-
+import MenuOpciones from "./menuOpciones";
+import { Link, Switch, BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import PublicLayout from "./components/Public/PublicLayout";
 import { AuthContext } from "./context/AuthContext";
 import { useContext, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
 
 function App() {
 

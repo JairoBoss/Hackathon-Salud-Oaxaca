@@ -1,12 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Footer from "../Footer";
+import PublicFooter from "./PublicFooter";
 
 const PublicLayout = () => {
   return (
     <>
       <Outlet></Outlet>
-      <Footer></Footer>
+      <PublicFooter></PublicFooter>
     </>
   );
 };
