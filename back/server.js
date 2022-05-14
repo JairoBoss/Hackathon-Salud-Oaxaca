@@ -8,10 +8,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./src/models");
 require("dotenv").config();
+const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 const aws = require("aws-sdk");
-
+const { promisify } = require("util");
 const randomBytes = promisify(crypto.randomBytes);
 const region = process.env.AWS_REGION;
 const bucketName = process.env.AWS_BUCKET_NAME;
@@ -36,7 +37,7 @@ var corsOptions = {
   origin: `http://localhost:3000`,
 };
 
-app.use(corsOptions());
+app.use(cors());
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
