@@ -5,12 +5,13 @@ import PublicLayout from "./components/public/PublicLayout";
 import PrivateLayout from "./components/private/PrivateLayout";
 import Login from "./components/public/Login";
 import Register from "./pages/Public/Register";
+import Form1 from "./pages/Public/Register/Form1";
 
 function App() {
   const publicRoutes = (
     <Route element={<PublicLayout />}>
       <Route index path="/" element={<Login />} />
-      <Route path="/registrarse" element={<Register />} />
+      <Route path="registrarse" element={<Register />} />
       <Route path="*" element={<div>No encontrada</div>} />
     </Route>
   );
