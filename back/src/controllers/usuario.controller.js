@@ -17,7 +17,7 @@ exports.create = async (req, res) => {
     Nombre: req.body.Nombre,
     Apellido_Paterno: req.body.Apellido_Paterno,
     Apellido_Materno: req.body.Apellido_Materno,
-    Direccion: req.body.Direccion,
+    Imagen: req.body.Direccion,
     Sexo: req.body.Sexo,
     Telefono: req.body.Telefono,
     Fecha_Nacimiento: req.body.Fecha_Nacimiento,
