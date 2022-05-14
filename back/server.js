@@ -1,5 +1,7 @@
 // back/node_modules/whatwg-url/lib/encoding.js
 // https://stackoverflow.com/questions/69187442/const-utf8encoder-new-textencoder-in-node-js
+
+
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -9,8 +11,8 @@ require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const aws = require("aws-sdk");
-const randomBytes = promisify(crypto.randomBytes);
 
+const randomBytes = promisify(crypto.randomBytes);
 const region = process.env.AWS_REGION;
 const bucketName = process.env.AWS_BUCKET_NAME;
 const accessKeyId = process.env.AWS_ACCESS_KEY;
