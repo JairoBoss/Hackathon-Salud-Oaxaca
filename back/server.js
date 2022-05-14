@@ -50,6 +50,12 @@ app.get("/", (req, res) => {
 });
 
 require("./src/routes/usuario.routes")(app)
+require("./src/routes/evento.routes")(app)
+require("./src/routes/medicamento.routes")(app)
+require("./src/routes/enfermedad.routes")(app)
+require("./src/routes/pregunta.routes")(app)
+require("./src/routes/examen.routes")(app)
+require("./src/routes/perfilMedico.routes")(app)
 
 app.listen(PORT, () => {
   console.log(`Server en el puerto ${PORT}`);

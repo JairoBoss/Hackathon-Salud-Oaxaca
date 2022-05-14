@@ -32,19 +32,19 @@ const UsuarioSchema = mongoose.Schema({
     type: String
   },
   Fecha_Nacimiento: {
-    type: String
+    type: Date
   },
   Lugar_Nacimiento: {
     type: String
   },
   Peso: {
-    type: Schema.Types.Decimal128
+    type: Number
   },
   Cintura: {
-    type: Schema.Types.Decimal128
+    type: Number
   },
   Altura: {
-    type: Schema.Types.Decimal128
+    type: Number
   },
   Tipo_Sangre: {
     type: String

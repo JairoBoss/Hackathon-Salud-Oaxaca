@@ -5,9 +5,9 @@ module.exports = (app) => {
 
   router.post("/", TrabajadorController.create);
 
-  router.get("/", verifyUserToken, TrabajadorController.findAll);
-
   router.post("/login", TrabajadorController.login);
+
+  router.get("/", verifyUserToken, TrabajadorController.findAll);
 
   router.get("/:id", verifyUserToken, TrabajadorController.findOne);
 
