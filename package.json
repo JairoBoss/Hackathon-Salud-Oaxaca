@@ -1,6 +1,5 @@
 {
-  "dependencies": {
-    "axios": "^0.27.2",
-    "react-toastify": "^9.0.1"
+  "scripts": {
+    "start": "node ./back/server.js"
   }
 }
