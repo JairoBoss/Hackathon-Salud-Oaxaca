@@ -113,7 +113,7 @@ exports.delete = (req, res) => {
 };
 
 exports.findByUserId = (req, res) => {
-  PerfilMedico.find({Usuario: req.body.id})
+  PerfilMedico.find({Usuario: req.params.id})
     .then((data) => {
       if (!data) {
         return res.status(404).send({
