@@ -5,10 +5,7 @@ import Layout from "./components/Layout";
 import PublicLayout from "./components/public/PublicLayout";
 import PrivateLayout from "./components/private/PrivateLayout";
 import Login from "./components/public/Login";
-import Register from "./pages/Public/Register";
-// import Form1 from "./pages/Public/Register/Form1";
-import AddEnfermedad from "./components/private/AddEnfermedad"
-import Perfil from "./components/private/Perfil"
+import Perfil from "./components/private/Perfil";
 import Examenes from "./components/public/quizzes";
 import QuizzDiabetes from "./components/public/quizzes/quizzDiabetes";
 import QuizzHipertencion from "./components/public/quizzes/quizzHipertencion";
@@ -17,11 +14,9 @@ import QuizzCardiovascular from "./components/public/quizzes/quizzCardiovascular
 import QuizzCovid from "./components/public/quizzes/quizzCovid";
 import Register from "./pages/public/Register";
 import AddEnfermedad from "./components/private/AddEnfermedad";
-import Perfil from "./components/private/Perfil";
 import Estudios from "./components/private/Examenes";
 import { AuthContext } from "./context/AuthContext";
 import AgregarDiario from "./components/private/AgregarDiario";
-import Examenes from "./components/public/quizzes/index";
 import EditProfile from "./pages/public/EditProfile";
 import Recomendaciones from "./components/private/Recomendaciones";
 import Diario from "./components/private/Diario";
@@ -29,13 +24,11 @@ import Tratamiento from "./components/private/Tratamiento";
 import AvisoPrivacidad from "./pages/public/AvisoPrivacidad";
 import TYC from "./pages/public/TYC";
 
-
 function App() {
   const { currentUser, checkUser } = useContext(AuthContext);
 
   const publicRoutes = (
     <Route element={<PublicLayout />}>
-      
       <Route index path="/" element={<Login />} />
       <Route path="registrarse" element={<Register />} />
       <Route path="aviso-privacidad" element={<AvisoPrivacidad />} />
@@ -46,18 +39,17 @@ function App() {
 
   const userRoutes = (
     <Route element={<PrivateLayout />}>
-
       <Route index path="/" element={<Perfil />} />
       <Route path="/enfermedades" element={<AddEnfermedad />} />
-      <Route path="/diario" element={<Diario/>} />
-      <Route path="/agregarDiario" element={<AgregarDiario/>} />      
+      <Route path="/diario" element={<Diario />} />
+      <Route path="/agregarDiario" element={<AgregarDiario />} />
       <Route path="/estudios" element={<Estudios />} />
-      <Route path="/editar-perfil" element={<EditProfile />} />      
+      <Route path="/editar-perfil" element={<EditProfile />} />
       <Route path="/examenes" element={<Examenes />} />
-      <Route path="recomendaciones" element={<Recomendaciones/>}/>    
+      <Route path="recomendaciones" element={<Recomendaciones />} />
       <Route path="/editar-perfil" element={<EditProfile />} />
       <Route path="/diario" element={<Diario />} />
-      <Route path="/examenes" element={<Examenes />} />      
+      <Route path="/examenes" element={<Examenes />} />
       <Route path="/tratamiento" element={<Tratamiento />} />
       <Route path="/estudios" element={<Estudios />} />
       <Route path="*" element={<div>No encontrada</div>} />
