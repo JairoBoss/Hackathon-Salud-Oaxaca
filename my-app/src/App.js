@@ -1,12 +1,11 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import PublicLayout from "./components/public/PublicLayout";
-import PrivateLayout from "./components/private/PrivateLayout";
-import Login from "./components/public/Login";
-import Perfil from "./components/private/Perfil";
-import AddEnfermedad from "./components/private/AddEnfermedad";
-import Register from "./pages/public/Register";
+import PublicLayout from "./components/Public/PublicLayout";
+import PrivateLayout from "./components/Private/PrivateLayout";
+import Login from "./components/Public/Login";
+import Register from "./pages/Public/Register";
+import Form1 from "./pages/Public/Register/Form1";
 
 function App() {
   const publicRoutes = (

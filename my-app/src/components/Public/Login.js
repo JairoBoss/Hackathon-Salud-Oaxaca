@@ -1,7 +1,7 @@
 import { SetStateAction, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import UserService from "../../services/User.Service";
+import UserService from "../../Services/User.Service";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,14 +16,14 @@ const Login = () => {
 
   const iniciarSesion = async () => {
     if (email && pwd) {
-      const data = {
+      const data = { 
         Contraseña: pwd,
         Correo: email,
       };
       try {
         setLoading(true);
         const promise = UserService.login(data).then((response) => {
-          if (response === "Credenciales Incorrectas") {
+          if (response === "Correo o contraseña incorrectas") {
             console.log(response);
             toast.error("Error al intentar ingresar, revise sus credenciales");
           } else {

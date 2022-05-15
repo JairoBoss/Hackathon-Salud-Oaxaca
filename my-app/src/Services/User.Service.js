@@ -1,12 +1,9 @@
 import httpClient from "./HttpClient";
 
-const prefix = "/usuario";
+const prefix = "/usuario/";
 
 export default class UserService {
-  static async register(user) {
-    return (await httpClient.post(`${prefix}/`, user)).data;
-  }
-
+  
   static async create(user) {
     return (await httpClient.post(`${prefix}`, user)).data;
   }
