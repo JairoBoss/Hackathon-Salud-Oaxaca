@@ -7,8 +7,11 @@ import Login from "./components/public/Login";
 import Perfil from "./components/private/Perfil";
 import AddEnfermedad from "./components/private/AddEnfermedad";
 import Register from "./pages/public/Register";
+import Examenes from "./components/private/Examenes";
 
 function App() {
+
+  
   const publicRoutes = (
     <Route element={<PublicLayout />}>
       <Route index path="/" element={<Login />} />
@@ -23,7 +26,7 @@ function App() {
       <Route index path="/agregarEnfermedad" element={<AddEnfermedad />} />
       <Route path="/perfil" element={<Perfil />} />
       <Route path="/diario" element={<div>Diario</div>} />
-      <Route path="/examenes" element={<div>Examenes</div>} />
+      <Route path="/examenes" element={<Examenes/>} />
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
       <Route path="tratamiento" element={<div>Tratamiento</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
