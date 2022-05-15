@@ -226,8 +226,7 @@ const Recomendaciones = () => {
                 <h2>Recomendaciones</h2>
                 <p className="mb-4">
                     Aquí puedes leer las recomendaciones que te hacemos con base en tus datos
-                </p>
-                <h2>Recomendaciones con base en tus Datos</h2>
+                </p>                
                 <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}

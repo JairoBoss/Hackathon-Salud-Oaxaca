@@ -8,14 +8,14 @@ import Login from "./components/public/Login";
 import Register from "./pages/public/Register";
 import AddEnfermedad from "./components/private/AddEnfermedad";
 import Perfil from "./components/private/Perfil";
-// import Examenes from "./components/public/quizzes";
 import Estudios from "./components/private/Examenes";
 import { AuthContext } from "./context/AuthContext";
-import Diario from "./components/private/Diario";
 import AgregarDiario from "./components/private/AgregarDiario";
 import Examenes from "./components/public/quizzes/index";
 import EditProfile from "./pages/public/EditProfile";
 import Recomendaciones from "./components/private/Recomendaciones";
+import Diario from "./components/private/Diario";
+import Tratamiento from "./components/private/Tratamiento";
 
 function App() {
   const { currentUser, checkUser } = useContext(AuthContext);
@@ -35,11 +35,14 @@ function App() {
       <Route path="/diario" element={<Diario/>} />
       <Route path="/agregarDiario" element={<AgregarDiario/>} />      
       <Route path="/estudios" element={<Estudios />} />
-      <Route path="/editar-perfil" element={<EditProfile />} />
-      <Route path="/diario" element={<div>Diario</div>} />
+      <Route path="/editar-perfil" element={<EditProfile />} />      
       <Route path="/examenes" element={<Examenes />} />
-      <Route path="recomendaciones" element={<Recomendaciones/>}/>
-      <Route path="tratamiento" element={<div>Tratamiento</div>} />
+      <Route path="recomendaciones" element={<Recomendaciones/>}/>    
+      <Route path="/editar-perfil" element={<EditProfile />} />
+      <Route path="/diario" element={<Diario />} />
+      <Route path="/examenes" element={<Examenes />} />      
+      <Route path="/tratamiento" element={<Tratamiento />} />
+      <Route path="/estudios" element={<Estudios />} />
       <Route path="*" element={<div>No encontrada</div>} />
     </Route>
   );
