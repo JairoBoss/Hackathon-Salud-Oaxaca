@@ -1,7 +1,7 @@
 import httpClient from "./HttpClient";
 
 const prefix = "/evento";
-
+  
 export default class EventoService {
   static async create(user) {
     return (await httpClient.post(`${prefix}`, user)).data;

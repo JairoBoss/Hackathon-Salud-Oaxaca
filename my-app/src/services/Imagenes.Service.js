@@ -14,7 +14,7 @@ export default class ImagenesService {
     }
 
     static async get(key) {
-        const result = (await httpClient.get(prefix + "/" + key)).data;
+        const result = (await httpClient.get("s3Url2" + "/" + key)).data;
 
         return {
             result
