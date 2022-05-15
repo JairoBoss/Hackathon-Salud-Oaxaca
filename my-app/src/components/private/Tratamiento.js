@@ -10,6 +10,8 @@ import {
   faCapsules,
   faFilePrescription,
   faClock,
+  faSquare,
+  faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { isEmpty } from "../../validations/validations";
@@ -28,7 +30,7 @@ const Tratamiento = () => {
         for (let i = 0; i < meds.length; i++) {
           MedicamentosService.get(meds[i])
             .then((medDesc) => {
-              setMeds((meds) => [...meds, medDesc]);
+              if (medDesc.Activo) setMeds((meds) => [...meds, medDesc]);
             })
             .catch((error) => {
               console.log(error);
@@ -54,18 +56,21 @@ const Tratamiento = () => {
             Dosis: "",
             Frecuencia: "",
             Foto: "",
+            Activo: false,
           }}
           onSubmit={(values, actions) => {
             MedicamentosService.create(values)
               .then((response) => {
-                meds.push(response);
+                var medFalse = meds;
+                if (response.Activo) setMeds((meds) => [...meds, response]);
+
+                medFalse.push(response);
                 let user = {
-                  Medicamentos: meds,
+                  Medicamentos: medFalse,
                 };
                 PerfilMedicoService.update(idFile, user)
                   .then((medAdded) => {
                     actions.resetForm();
-                    setMeds((meds) => [...meds, medAdded]);
                   })
                   .catch((error) => {
                     console.log(error);
@@ -149,6 +154,23 @@ const Tratamiento = () => {
                     >
                       Frecuencia *
                     </label>
+                  </div>
+                  <div className="form-check icon-check mb-4">
+                    <Field
+                      className="form-check-input"
+                      type="checkbox"
+                      name="Activo"
+                      id="donatorCheck"
+                    />
+                    <label className="form-check-label" htmlFor="donatorCheck">
+                      Lo consumo actualmente
+                    </label>
+                    <i className="icon-check-1 color-gray-dark">
+                      <FontAwesomeIcon icon={faSquare} fontSize={15} />
+                    </i>
+                    <i className="icon-check-2 color-highlight">
+                      <FontAwesomeIcon icon={faCheckSquare} fontSize={15} />
+                    </i>
                   </div>
                   <div className="file-data pb-5">
                     <input
