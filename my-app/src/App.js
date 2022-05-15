@@ -9,7 +9,7 @@ import Register from "./pages/public/Register";
 import AddEnfermedad from "./components/private/AddEnfermedad";
 import Perfil from "./components/private/Perfil";
 // import Examenes from "./components/public/quizzes";
-import Examenes from "./components/private/Examenes"
+import Examenes from "./components/private/Examenes";
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
@@ -26,9 +26,9 @@ function App() {
   const userRoutes = (
     <Route element={<PrivateLayout />}>
       <Route index path="/" element={<div>Inicio</div>} />
-      <Route index path="/agregarEnfermedad" element={<AddEnfermedad />} />
+      <Route index path="/enfermedades" element={<AddEnfermedad />} />
       <Route path="/perfil" element={<Perfil />} />
-      <Route path="/diario" element={<div>Diario</div>} />      
+      <Route path="/diario" element={<div>Diario</div>} />
       <Route path="/examenes" element={<Examenes />} />
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
       <Route path="tratamiento" element={<div>Tratamiento</div>} />

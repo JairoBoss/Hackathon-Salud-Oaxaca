@@ -54,7 +54,7 @@ const Login = () => {
   return (
     <>
       <Header titulo={"Iniciar sesión"}></Header>
-      <div>
+      <div className="page-content header-clear-medium">
         <div className="limiter">
           <div className="container-login100">
             <div className="wrap-login100">
@@ -62,7 +62,7 @@ const Login = () => {
                 className="login100-form validate-form"
                 style={{ backgroundColor: "white" }}
               >
-                <img src={Logo} />
+                <img src={Logo} width={"100%"} />
                 <div className="wrap-input100 validate-input">
                   <input
                     className="input100"
