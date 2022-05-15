@@ -50,36 +50,65 @@ const QuimicaSanguinea = () => {
                         "Numero": values.Trigliceridos
                     }
 
+                    let examen = "";
+
                     let id1 = "";
                     let id2 = "";
                     let id3 = "";
                     let id4 = "";
+                    
+
 
                     setLoading(true);
                     PreguntaService.create(pregunta1).then((response) => {
                         id1 = response._id;
-
                         PreguntaService.create(pregunta2).then((response2) => {
                             id2 = response2._id;
                             PreguntaService.create(pregunta3).then((response3) => {
                                 id3 = response3._id;
-                                PreguntaService.create(pregunta3).then((response4) => {
+                                PreguntaService.create(pregunta4).then((response4) => {
                                     id4 = response4._id;
-                                })
-                                let data = {
-                                    Tipo: "Química Sanguinea",
-                                    Fecha: values.Fecha_Examen,
-                                    Preguntas: [id1, id2, id3, id4]
-                                }
-                                ExamenService.create(data).then((response) => {
-                                    if (file) {
-                                        ImagenesService.upload(file).then((response2) => {
+
+                                    let data = {
+                                        Tipo: "Química Sanguinea",
+                                        Fecha: values.Fecha_Examen,
+                                        Preguntas: [id1, id2, id3, id4]
+                                    }
+
+
+                                    ExamenService.create(data).then((response) => {
+                                        examen = response._id;
+                                        if (file) {
+                                            ImagenesService.upload(file).then((response2) => {
+                                                PerfilMedicoService.getByUserId(user._id).then((response3) => {
+                                                    let docs = response3[0].Documentos;
+                                                    let examenes = response3[0].Examenes;
+                                                    docs.push(response2.result.data);
+                                                    examenes.push(examen);
+                                                    let data = {
+                                                        Documentos: docs,
+                                                        Examenes: examenes
+                                                    }
+                                                    PerfilMedicoService.update(response3[0]._id, data).then((response4) => {
+                                                        toast.success("Examen agregado correctamente");
+                                                        setLoading(false);
+                                                        setFile("");
+                                                        resetForm();
+                                                    }).catch((error) => {
+                                                        toast.error(error.message);
+                                                        setLoading(false);
+                                                    })
+                                                })
+                                            }).catch((error) => {
+                                                toast.error("Error al subir foto");
+                                            });
+                                        } else {
                                             PerfilMedicoService.getByUserId(user._id).then((response3) => {
-                                                let docs = response3[0].Documentos;                                                
-                                                docs.push(response2.result.data);
-                                                console.log(docs);
+                                                let examenes = response3[0].Examenes;
+                                                examenes.push(examen);
+                                                console.log(examenes);
                                                 let data = {
-                                                    Documentos: docs
+                                                    Examenes: examenes
                                                 }
                                                 PerfilMedicoService.update(response3[0]._id, data).then((response4) => {
                                                     toast.success("Examen agregado correctamente");
@@ -91,17 +120,11 @@ const QuimicaSanguinea = () => {
                                                     setLoading(false);
                                                 })
                                             })
-                                        }).catch((error) => {
-                                            toast.error("Error al subir foto");
-                                        });
-                                    } else {
-                                        toast.success("Examen agregado correctamente");
-                                        setFile("");
-                                        setLoading(false);
-                                        resetForm();
-                                    }
-                                }).catch((error) => {
-                                    toast.error(error.message);
+
+                                        }
+                                    }).catch((error) => {
+                                        toast.error(error.message);
+                                    })
                                 })
                             })
                         }).catch((error) => {

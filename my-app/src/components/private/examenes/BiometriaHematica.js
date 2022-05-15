@@ -47,6 +47,7 @@ const BiometriaHematica = () => {
                     let id1 = "";
                     let id2 = "";
                     let id3 = "";
+                    let examen = "";
                     setLoading(true);
                     PreguntaService.create(pregunta1).then((response) => {
                         id1 = response._id;
@@ -61,16 +62,20 @@ const BiometriaHematica = () => {
                                     Preguntas: [id1, id2, id3]
                                 }
                                 ExamenService.create(data).then((response) => {
+                                    examen = response._id;
                                     if (file) {
                                         ImagenesService.upload(file).then((response2) => {
                                             PerfilMedicoService.getByUserId(user._id).then((response3) => {
                                                 let docs = response3[0].Documentos;                                                
-                                                docs.push(response2.result.data);
-                                                console.log(docs);
+                                                let examenes = response3[0].Examenes;
+                                                examenes.push(examen);
+                                                docs.push(response2.result.data);                                                                                                
                                                 let data = {
-                                                    Documentos: docs
-                                                }
+                                                    Documentos: docs,
+                                                    Examenes:examenes
+                                                }                                                
                                                 PerfilMedicoService.update(response3[0]._id, data).then((response4) => {
+                                                    toast.success(response4);
                                                     toast.success("Examen agregado correctamente");
                                                     setLoading(false);
                                                     setFile("");
@@ -84,10 +89,25 @@ const BiometriaHematica = () => {
                                             toast.error("Error al subir foto");
                                         });
                                     } else {
-                                        toast.success("Examen agregado correctamente");
-                                        setFile("");
-                                        setLoading(false);
-                                        resetForm();
+                                        PerfilMedicoService.getByUserId(user._id).then((response3) => {                                                                                  
+                                            let examenes = response3[0].Examenes;
+
+                                            examenes.push(examen);                                                                                        
+                                            console.log(examenes);
+                                            let data = {                                                
+                                                Examenes:examenes
+                                            }                                                                                   
+                                            PerfilMedicoService.update(response3[0]._id, data).then((response4) => {       
+                                                console.log(response4);
+                                                toast.success("Examen agregado correctamente!!!");
+                                                setLoading(false);
+                                                setFile("");
+                                                resetForm();
+                                            }).catch((error) => {
+                                                toast.error(error.message);
+                                                setLoading(false);
+                                            })
+                                        })
                                     }
                                 }).catch((error) => {
                                     toast.error(error.message);
