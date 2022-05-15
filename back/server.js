@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 8080;
 var corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://empower-18f9d.web.app/",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
