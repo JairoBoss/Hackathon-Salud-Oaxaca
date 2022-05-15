@@ -25,9 +25,8 @@ function App() {
 
   const userRoutes = (
     <Route element={<PrivateLayout />}>
-      <Route index path="/" element={<div>Inicio</div>} />
-      <Route index path="/enfermedades" element={<AddEnfermedad />} />
-      <Route path="/perfil" element={<Perfil />} />
+      <Route index path="/" element={<Perfil />} />
+      <Route path="/enfermedades" element={<AddEnfermedad />} />
       <Route path="/diario" element={<div>Diario</div>} />
       <Route path="/examenes" element={<Examenes />} />
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
