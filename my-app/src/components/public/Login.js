@@ -18,7 +18,7 @@ const Login = () => {
 
   const iniciarSesion = async () => {
     if (email && pwd) {
-      const data = { 
+      const data = {
         Contraseña: pwd,
         Correo: email,
       };

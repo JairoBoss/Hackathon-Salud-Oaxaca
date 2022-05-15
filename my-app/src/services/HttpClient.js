@@ -14,7 +14,7 @@ httpClient.interceptors.request.use(
       "Content-Type": "application/json",
     };
 
-    if (token) config.headers.Authorization = token;
+    if (token) config.headers.Authorization = token;    
     return config;
   },
   function (error) {
