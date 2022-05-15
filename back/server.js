@@ -34,10 +34,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 8080;
 var corsOptions = {
-  origin: `http://localhost:3000`,
+  credentials: true,
+  origin: "*",
 };
 
-app.use(cors());
+app.use(corsOptions);
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
