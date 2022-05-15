@@ -34,7 +34,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 8080;
 var corsOptions = {
-  credentials: true,
   origin: "*",
 };
 
