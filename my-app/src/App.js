@@ -9,10 +9,12 @@ import Register from "./pages/Public/Register";
 import AddEnfermedad from "./components/private/AddEnfermedad"
 import Perfil from "./components/private/Perfil"
 import Examenes from "./components/public/quizzes";
+import QuizzDiabetes from "./components/public/quizzes/quizzDiabetes";
 
 function App() {
   const publicRoutes = (
     <Route element={<PublicLayout />}>
+      
       <Route index path="/" element={<Login />} />
       <Route path="registrarse" element={<Register />} />
       <Route path="*" element={<div>No encontrada</div>} />
@@ -26,6 +28,7 @@ function App() {
       <Route path="/perfil" element={<Perfil />} />
       <Route path="/diario" element={<div>Diario</div>} />
       <Route path="/examenes" element={<Examenes/>} />
+      <Route path="/examen/diabetes" element={<QuizzDiabetes/>} />
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
       <Route path="tratamiento" element={<div>Tratamiento</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
