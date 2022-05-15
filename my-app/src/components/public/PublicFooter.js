@@ -16,8 +16,14 @@ const PublicFooter = () => {
           <span>Iniciar sesi&oacute;n</span>
         </a>
         <a
-          href="/registrarse"
-          className={location.pathname === "/registrarse" ? "active-nav" : ""}
+          href="/aviso-privacidad"
+          className={
+            location.pathname === "/registrarse" ||
+            location.pathname === "/aviso-privacidad" ||
+            location.pathname === "/terminos-y-condiciones"
+              ? "active-nav"
+              : ""
+          }
         >
           <i>
             <FontAwesomeIcon icon={faUserEdit} />
