@@ -1,30 +1,13 @@
 import ReactDOM from "react-dom";
 import BiometriaHematica from "./examenes/BiometriaHematica";
+import QuimicaSanguinea from "./examenes/QuimicaSanguinea";
+import EGO from "./examenes/EGO";
 import { Formik, Form, Field } from "formik";
 import { useState, useEffect } from "react";
 
 const Examenes = () => {
-    const [pantalla, setPantalla] = useState(1);
-
-    useEffect(() =>{
-        screen();
-    }, [pantalla])
-
-    const BH = () => {
-        let mainDiv = document.getElementById("mainDiv");
-        if (mainDiv) {
-            if (mainDiv.children.length > 0) {
-                ReactDOM.unmountComponentAtNode(mainDiv);
-            }
-            ReactDOM.render(<BiometriaHematica />, mainDiv);
-        }
-    };
-
-    const screen = () => {
-        if (pantalla == 1) {
-            BH();
-        }
-    }
+    const [pantalla, setPantalla] = useState(0);
+    const forms = [<BiometriaHematica />, <QuimicaSanguinea />, <EGO/>];
 
     return (
         <><div className="card card-style">
@@ -45,13 +28,12 @@ const Examenes = () => {
                         <Form>
                             <div className="input-style input-style-always-active has-borders">
                                 <Field name="Tipo" as="select" value={pantalla} onChange={(e) => {
-                                    setPantalla(e.target.value);
-                                    screen()
+                                    setPantalla(e.target.value);                                    
                                 }} className="form-control">
-                                    <option value="1" >Biometría hemática</option>
-                                    <option value="2">Química sanguínea</option>
-                                    <option value="3">EGO</option>
-                                    <option value="4">Hemoglobina glucosida</option>
+                                    <option value="0" >Biometría hemática</option>
+                                    <option value="1">Química sanguínea</option>
+                                    <option value="2">EGO</option>
+                                    {/* <option value="3">Hemoglobina glucosida</option> */}
                                 </Field>
                                 <label htmlFor="Sexo">Examen médico</label>
                             </div>
@@ -60,7 +42,7 @@ const Examenes = () => {
                     )}
                 </Formik>
                 <section className="recent" id="mainDiv">
-
+                    {forms[pantalla]}
                 </section>
             </div>
         </div>

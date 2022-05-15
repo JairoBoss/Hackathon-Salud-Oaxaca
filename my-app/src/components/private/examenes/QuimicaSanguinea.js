@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import ImagenesService from "../../../services/Imagenes.Service";
 import PerfilMedicoService from "../../../services/PerfilMedico.Service";
 
-const BiometriaHematica = () => {
+const QuimicaSanguinea = () => {
     const [image, setImage] = useState("");
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState("");
@@ -23,30 +23,38 @@ const BiometriaHematica = () => {
             <Formik
                 initialValues={{
                     Imagen: image,
-                    Leucocitos: "",
-                    Hemoglobina: "",
-                    Plaquetas: "",
+                    Glucosa: "",
+                    Creatinina: "",
+                    Colesterol: "",
+                    Trigliceridos: "",
                     Fecha_Examen: ""
                 }}
                 onSubmit={(values, { resetForm }) => {
                     let pregunta1 = {
-                        "Descripcion": "Leucocitos",
-                        "Numero": values.Leucocitos
+                        "Descripcion": "Glucosa",
+                        "Numero": values.Glucosa
                     }
 
                     let pregunta2 = {
-                        "Descripcion": "Hemoglobina",
-                        "Numero": values.Hemoglobina
+                        "Descripcion": "Creatinina",
+                        "Numero": values.Creatinina
                     }
 
                     let pregunta3 = {
-                        "Descripcion": "Plaquetas",
-                        "Numero": values.Plaquetas
+                        "Descripcion": "Colesterol",
+                        "Numero": values.Colesterol
+                    }
+
+                    let pregunta4 = {
+                        "Descripcion": "Trigliceridos",
+                        "Numero": values.Trigliceridos
                     }
 
                     let id1 = "";
                     let id2 = "";
                     let id3 = "";
+                    let id4 = "";
+
                     setLoading(true);
                     PreguntaService.create(pregunta1).then((response) => {
                         id1 = response._id;
@@ -55,10 +63,13 @@ const BiometriaHematica = () => {
                             id2 = response2._id;
                             PreguntaService.create(pregunta3).then((response3) => {
                                 id3 = response3._id;
+                                PreguntaService.create(pregunta3).then((response4) => {
+                                    id4 = response4._id;
+                                })
                                 let data = {
-                                    Tipo: "Biometría hemática",
+                                    Tipo: "Química Sanguinea",
                                     Fecha: values.Fecha_Examen,
-                                    Preguntas: [id1, id2, id3]
+                                    Preguntas: [id1, id2, id3, id4]
                                 }
                                 ExamenService.create(data).then((response) => {
                                     if (file) {
@@ -106,27 +117,27 @@ const BiometriaHematica = () => {
                     <Form>
                         <div className="content mb-0">
                             <div className="text-center mb-3">
-                                <h2>Biometría hemática</h2>
+                                <h2>Química Sanguínea</h2>
                                 <p className="mb-4">
-                                    Aquí puedes introducir tus resultados de tu Biometría Hemática
+                                    Aquí puedes introducir tus resultados de tu Química Sanguinea
                                 </p>
                             </div>
                             <div className="input-style input-style-always-active has-borders has-icon">
                                 <Field
-                                    name="Leucocitos"
+                                    name="Glucosa"
                                     type="number"
                                     className="form-control"
                                     validate={isEmpty}
                                 />
                                 <label
-                                    htmlFor="Leucocitos"
+                                    htmlFor="Glucosa"
                                     className={
-                                        errors.Leucocitos && touched.Leucocitos
+                                        errors.Glucosa && touched.Glucosa
                                             ? "color-red-dark font-13"
                                             : "color-blue-dark font-13"
                                     }
                                 >
-                                    Leucocitos
+                                    Glucosa
                                 </label>
                                 <em>
                                     1 x 10^-3 / ml
@@ -134,20 +145,20 @@ const BiometriaHematica = () => {
                             </div>
                             <div className="input-style input-style-always-active has-borders has-icon">
                                 <Field
-                                    name="Hemoglobina"
+                                    name="Creatinina"
                                     className="form-control"
                                     type="number"
                                     validate={isEmpty}
                                 />
                                 <label
-                                    htmlFor="Hemoglobina"
+                                    htmlFor="Creatinina"
                                     className={
-                                        errors.Hemoglobina && touched.Hemoglobina
+                                        errors.Creatinina && touched.Creatinina
                                             ? "color-red-dark font-13"
                                             : "color-blue-dark font-13"
                                     }
                                 >
-                                    Hemoglobina
+                                    Creatinina
                                 </label>
                                 <em>
                                     g/dl
@@ -155,20 +166,41 @@ const BiometriaHematica = () => {
                             </div>
                             <div className="input-style input-style-always-active has-borders has-icon">
                                 <Field
-                                    name="Plaquetas"
+                                    name="Colesterol"
                                     type="number"
                                     className="form-control"
                                     validate={isEmpty}
                                 />
                                 <label
-                                    htmlFor="Plaquetas"
+                                    htmlFor="Colesterol"
                                     className={
-                                        errors.Plaquetas && touched.Plaquetas
+                                        errors.Colesterol && touched.Colesterol
                                             ? "color-red-dark font-13"
                                             : "color-blue-dark font-13"
                                     }
                                 >
-                                    Plaquetas
+                                    Colesterol
+                                </label>
+                                <em>
+                                    1 x 10^-3 / ml
+                                </em>
+                            </div>
+                            <div className="input-style input-style-always-active has-borders has-icon">
+                                <Field
+                                    name="Trigliceridos"
+                                    type="number"
+                                    className="form-control"
+                                    validate={isEmpty}
+                                />
+                                <label
+                                    htmlFor="Trigliceridos"
+                                    className={
+                                        errors.Trigliceridos && touched.Trigliceridos
+                                            ? "color-red-dark font-13"
+                                            : "color-blue-dark font-13"
+                                    }
+                                >
+                                    Trigliceridos
                                 </label>
                                 <em>
                                     1 x 10^-3 / ml
@@ -242,4 +274,4 @@ const BiometriaHematica = () => {
     );
 }
 
-export default BiometriaHematica;
+export default QuimicaSanguinea;
