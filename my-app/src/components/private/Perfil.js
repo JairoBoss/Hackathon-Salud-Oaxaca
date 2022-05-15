@@ -4,6 +4,7 @@ import PerfilMedicoService from "../../services/PerfilMedico.Service";
 import DiseaseService from "../../services/Enfermedades.Service";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import Header from "../Header";
 
 const Perfil = () => {
   const [IMC, setIMC] = useState("");
@@ -57,118 +58,114 @@ const Perfil = () => {
 
   return (
     <>
-      <div className="card card-style" style={{ marginTop: "10px" }}>
-        <div className="d-flex content">
-          <div className="flex-grow-1">
+      <Header titulo={"Mi Perfil"}></Header>
+      <div className="page-content header-clear-medium">
+        <div className="card card-style">
+          <div className="d-flex content">
+            <div className="flex-grow-1">
+              <div>
+                <h1 className="font-700 mb-1">
+                  {user.Nombre +
+                    " " +
+                    user.Apellido_Paterno +
+                    " " +
+                    user.Apellido_Materno}
+                </h1>
+                <p className="mb-0 pb-1 pe-3">
+                  Edit your Profile Settings here and apply. This is just a demo
+                  page.
+                </p>
+              </div>
+            </div>
             <div>
-              <h1 className="font-700 mb-1">
-                {user.Nombre} {user.Apellido_Materno} {user.Apellido_Paterno}
-              </h1>
-              <p className="mb-0 pb-1 pe-3">Sexo: {user.Sexo}</p>
-              <p className="mb-0 pb-1 pe-3">{user.Direccion}</p>
-              <p className="mb-0 pb-1 pe-3">Peso: {user.Peso} kg</p>
-              <p className="mb-0 pb-1 pe-3">Altura: {user.Altura / 100} mts</p>
-              <p className="mb-0 pb-1 pe-3">Teléfono: {user.Telefono}</p>
-              <p className="mb-0 pb-1 pe-3">Correo: {user.Correo}</p>
-              <h5>IMC: {Math.round(IMC, 3)}</h5>
-              <div
-                style={{
-                  backgroundColor: color,
-                  borderRadius: "10px",
-                  height: "30px",
-                  textAlign: "center",
-                }}
-              >
-                {text}
+              <img
+                src="images/pictures/faces/4s.png"
+                data-src="images/pictures/faces/4s.png"
+                width={80}
+                className="rounded-circle mt- shadow-xl preload-img entered loaded"
+                data-ll-status="loaded"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="card card-style" style={{ marginTop: "10px" }}>
+          <div className="d-flex content">
+            <div className="flex-grow-1">
+              <h1 className="font-700 mb-1">Tipo de sangre</h1>
+              <p className="mb-0 pb-1 pe-3">
+                Tipo de Sangre: {user.Tipo_Sangre}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="card card-style" style={{ marginTop: "10px" }}>
+          <div className="d-flex content">
+            <div className="flex-grow-1">
+              <h1 className="font-700 mb-1">Alergias</h1>
+              {user.Alergias &&
+                user.Alergias.map((alergia, index) => (
+                  <div key={index} className="text-center mb-3">
+                    <p
+                      key={index + alergia}
+                      className="icon icon-xs rounded-sm shadow-l me-1"
+                      style={{
+                        width: "60%",
+                        backgroundColor: "#8cc152",
+                        color: "white",
+                      }}
+                    >
+                      {alergia}
+                    </p>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+        <div className="card card-style" style={{ marginTop: "10px" }}>
+          <div className="d-flex content">
+            <div className="flex-grow-1">
+              <h1 className="font-700 mb-1">Enfermedades</h1>
+              <div className="flex-grow-1">
+                <div className="text-center mb-3">
+                  <a
+                    href="/agregarEnfermedad"
+                    className="icon icon-xs rounded-sm shadow-l me-1 bg-phone"
+                    style={{ width: "80%" }}
+                  >
+                    Ver
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-          <div>
-            <img
-              src="https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg"
-              data-src="images/pictures/faces/4s.png"
-              width={80}
-              className="rounded-circle mt- shadow-xl preload-img entered loaded"
-              data-ll-status="loaded"
-            />
-          </div>
         </div>
-      </div>
-      <div className="card card-style" style={{ marginTop: "10px" }}>
-        <div className="d-flex content">
-          <div className="flex-grow-1">
-            <h1 className="font-700 mb-1">Tipo de sangre</h1>
-            <p className="mb-0 pb-1 pe-3">Tipo de Sangre: {user.Tipo_Sangre}</p>
-          </div>
-        </div>
-      </div>
-      <div className="card card-style" style={{ marginTop: "10px" }}>
-        <div className="d-flex content">
-          <div className="flex-grow-1">
-            <h1 className="font-700 mb-1">Alergias</h1>
-            {user.Alergias &&
-              user.Alergias.map((alergia, index) => (
-                <div key={index} className="text-center mb-3">
-                  <p
-                    key={index + alergia}
-                    className="icon icon-xs rounded-sm shadow-l me-1"
-                    style={{
-                      width: "60%",
-                      backgroundColor: "#8cc152",
-                      color: "white",
-                    }}
-                  >
-                    {alergia}
-                  </p>
-                </div>
-              ))}
-          </div>
-        </div>
-      </div>
-      <div className="card card-style" style={{ marginTop: "10px" }}>
-        <div className="d-flex content">
-          <div className="flex-grow-1">
-            <h1 className="font-700 mb-1">Enfermedades</h1>
+        <div className="card card-style" style={{ marginTop: "10px" }}>
+          <div className="d-flex content">
             <div className="flex-grow-1">
+              <h1 className="font-700 mb-1">Ubicación</h1>
+              <p className="mb-0 pb-1 pe-3">
+                Fecha de Nacimiento:{" "}
+                {new Date(user.Fecha_Nacimiento).toLocaleDateString()}
+              </p>
+              <p className="mb-0 pb-1 pe-3">
+                Lugar de Nacimiento: {user.Lugar_Nacimiento}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="card card-style" style={{ marginTop: "10px" }}>
+          <div className="d-flex content">
+            <div className="flex-grow-1">
+              <h1 className="font-700 mb-1">Editar</h1>
               <div className="text-center mb-3">
                 <a
-                  href="/agregarEnfermedad"
+                  href="#"
                   className="icon icon-xs rounded-sm shadow-l me-1 bg-phone"
                   style={{ width: "80%" }}
                 >
-                  Ver
+                  <FontAwesomeIcon icon={faPenToSquare} />
                 </a>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="card card-style" style={{ marginTop: "10px" }}>
-        <div className="d-flex content">
-          <div className="flex-grow-1">
-            <h1 className="font-700 mb-1">Ubicación</h1>
-            <p className="mb-0 pb-1 pe-3">
-              Fecha de Nacimiento:{" "}
-              {new Date(user.Fecha_Nacimiento).toLocaleDateString()}
-            </p>
-            <p className="mb-0 pb-1 pe-3">
-              Lugar de Nacimiento: {user.Lugar_Nacimiento}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="card card-style" style={{ marginTop: "10px" }}>
-        <div className="d-flex content">
-          <div className="flex-grow-1">
-            <h1 className="font-700 mb-1">Editar</h1>
-            <div className="text-center mb-3">
-              <a
-                href="#"
-                className="icon icon-xs rounded-sm shadow-l me-1 bg-phone"
-                style={{ width: "80%" }}
-              >
-                <FontAwesomeIcon icon={faPenToSquare} />
-              </a>
             </div>
           </div>
         </div>

@@ -1,18 +1,24 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserEdit, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
 
 const PublicFooter = () => {
+  const location = useLocation();
+
   return (
     <div id="page" data-swup={0} className="device-is-ios">
       <div id="footer-bar" className="footer-bar-1">
-        <a href="/" className="active-nav">
+        <a href="/" className={location.pathname === "/" ? "active-nav" : ""}>
           <i>
             <FontAwesomeIcon icon={faUser} />
           </i>
           <span>Iniciar sesi&oacute;n</span>
         </a>
-        <a href="/registrarse">
+        <a
+          href="/registrarse"
+          className={location.pathname === "/registrarse" ? "active-nav" : ""}
+        >
           <i>
             <FontAwesomeIcon icon={faUserEdit} />
           </i>
