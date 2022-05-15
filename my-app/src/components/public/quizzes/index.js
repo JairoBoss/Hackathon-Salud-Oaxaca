@@ -46,6 +46,16 @@ const Examenes = () => {
           }
           url={"examen/riesgo-cardiovascular"}
         />
+        <Card
+          nombre={"Test Covid"}
+          imagen={
+            "https://cdn.create.vista.com/api/media/medium/359781644/stock-photo-doctor-medical-mask-white-coat?token="
+          }
+          descipcion={
+            "Sabias que mas de 1/4 de la poblacion en MX tiene riesgo de padecer covid?"
+          }
+          url={"examen/test-covid"}
+        />
       </div>
     </>
   );

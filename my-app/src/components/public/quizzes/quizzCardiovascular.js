@@ -15,16 +15,15 @@ import { FullPageLoading } from "./pageLoading";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-const QuizzDiabetes = ({ titulo }) => {
+const QuizzCardiovascular = ({ titulo }) => {
   const [value, setValue] = useState({
     edad: 0,
-    imc: 0,
-    cm: 0,
-    ejercicio: 0,
-    alimentacion: 0,
+    genero: 0,
+    diabetes: 0,
+    fumas: 0,
     medicamentos: 0,
     glucosa: 0,
-    familiar: 0,
+    colesterol: 0,
   });
 
   const [loading, setLoad] = useState(false);
@@ -37,16 +36,13 @@ const QuizzDiabetes = ({ titulo }) => {
     setComponent(false);
     setSuma(
       value.edad +
-        value.imc +
-        value.cm +
-        value.ejercicio +
-        value.alimentacion +
+        value.genero +
+        value.diabetes +
+        value.fumas +
         value.medicamentos +
         value.glucosa +
-        value.familiar
+        value.colesterol
     );
-    console.log(suma);
-
     setResultado(true);
     setLoad(false);
     //Calcular y entregar una card con recomendaciones y laboratorio
@@ -63,17 +59,17 @@ const QuizzDiabetes = ({ titulo }) => {
       {component ? (
         <div className="page-content header-clear-medium">
           <div id="examenaa">
-            <Header titulo={"Examen Diabetes"} />
+            <Header titulo={"Riesgo Cardiovascular"} />
             <div className="card card-style">
               <img
-                data-src="https://imagenes.elpais.com/resizer/1f6Qz0r2BsGyAgkaxvQ3L1fjso4=/1960x1103/cloudfront-eu-central-1.images.arcpublishing.com/prisa/G3EGGCDKNRFBDC27SDXQLF53BQ.jpg"
+                data-src="https://cardiavant.com/wp-content/uploads/riesgo.png"
                 className="preload-img img-fluid bottom-20 entered loaded"
                 data-ll-status="loaded"
-                src="https://imagenes.elpais.com/resizer/1f6Qz0r2BsGyAgkaxvQ3L1fjso4=/1960x1103/cloudfront-eu-central-1.images.arcpublishing.com/prisa/G3EGGCDKNRFBDC27SDXQLF53BQ.jpg"
+                src="https://cardiavant.com/wp-content/uploads/riesgo.png"
               />
               <div className="content mb-0">
                 <div className="float-start">
-                  <h1 className="mb-0">Cuestionario Diabetes</h1>
+                  <h1 className="mb-0">Cuestionario Riesgo Cardiovascular</h1>
                 </div>
                 <div className="clearfix" />
                 <div className="divider mt-2 mb-2" />
@@ -104,9 +100,10 @@ const QuizzDiabetes = ({ titulo }) => {
                 </div>
                 <h5>Descripcion</h5>
                 <p>
-                  La diabetes es una enfermedad que se presenta cuando el nivel
-                  de glucosa en la sangre, también conocido como azúcar en la
-                  sangre, es demasiado alto.
+                  Las enfermedades cardiovasculares pueden manifestarse de
+                  muchas formas: presión arterial alta, enfermedad arterial
+                  coronaria, enfermedad valvular, accidente cerebrovascular y
+                  arritmias (latidos irregulares).
                 </p>
                 <div className="col-1"></div>
               </div>
@@ -128,13 +125,16 @@ const QuizzDiabetes = ({ titulo }) => {
                         defaultValue="0"
                         value={value.edad}
                         onChange={(e) =>
-                          setValue({ ...value, edad: parseInt(e.target.value) })
+                          setValue({
+                            ...value,
+                            edad: e.target.value,
+                          })
                         }
                       >
                         <FormControlLabel
                           value="0"
                           control={<Radio />}
-                          label="Menor 45"
+                          label="Menor 40"
                         />
                         <FormControlLabel
                           value="2"
@@ -149,7 +149,7 @@ const QuizzDiabetes = ({ titulo }) => {
                         <FormControlLabel
                           value="4"
                           control={<Radio />}
-                          label="Mayor 64"
+                          label="Mayor 75"
                         />
                       </RadioGroup>
                     </FormControl>
@@ -160,7 +160,7 @@ const QuizzDiabetes = ({ titulo }) => {
 
               <div className="content mb-0">
                 <div className="float-start">
-                  <h2 className="mb-0">¿Cuál es tu IMC?</h2>
+                  <h2 className="mb-0">¿Cual es tu género?</h2>
                 </div>
                 <div className="clearfix" />
                 <br />
@@ -172,103 +172,60 @@ const QuizzDiabetes = ({ titulo }) => {
                         aria-labelledby="demo-row-radio-buttons-group-label"
                         name="row-radio-buttons-group"
                         defaultValue="0"
-                        value={value.imc}
-                        onChange={(e) =>
-                          setValue({ ...value, imc: parseInt(e.target.value) })
-                        }
-                      >
-                        <FormControlLabel
-                          value="0"
-                          control={<Radio />}
-                          label="<25"
-                        />
-                        <FormControlLabel
-                          value="1"
-                          control={<Radio />}
-                          label="25-30"
-                        />
-                        <FormControlLabel
-                          value="3"
-                          control={<Radio />}
-                          label=">30"
-                        />
-                      </RadioGroup>
-                    </FormControl>
-                  </center>
-                </div>
-                <div className="divider mt-2 mb-2" />
-              </div>
-              <div className="content mb-0">
-                <div className="float-start">
-                  <h2 className="mb-0">¿Cuanto mide tu cintura (cm)?</h2>
-                </div>
-                <div className="clearfix" />
-                <br />
-                <div className="row">
-                  <center>
-                    <FormControl>
-                      <RadioGroup
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                        defaultValue="0"
-                        value={value.cm}
-                        onChange={(e) =>
-                          setValue({ ...value, cm: parseInt(e.target.value) })
-                        }
-                      >
-                        <FormControlLabel
-                          value="0"
-                          control={<Radio />}
-                          label="<80 cm"
-                        />
-                        <FormControlLabel
-                          value="3"
-                          control={<Radio />}
-                          label="80-88 cm"
-                        />
-                        <FormControlLabel
-                          value="4"
-                          control={<Radio />}
-                          label=">88 cm"
-                        />
-                      </RadioGroup>
-                    </FormControl>
-                  </center>
-                </div>
-                <div className="divider mt-2 mb-2" />
-              </div>
-              <div className="content mb-0">
-                <div className="float-start">
-                  <h2 className="mb-0">
-                    ¿Realizas al menos 30 minutos de ejercicio al día?
-                  </h2>
-                </div>
-                <div className="clearfix" />
-                <br />
-                <div className="row">
-                  <center>
-                    <FormControl>
-                      <RadioGroup
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                        defaultValue="0"
-                        value={value.ejercicio}
+                        value={value.genero}
                         onChange={(e) =>
                           setValue({
                             ...value,
-                            ejercicio: parseInt(e.target.value),
+                            genero: parseInt(e.target.value),
                           })
                         }
                       >
                         <FormControlLabel
                           value="0"
                           control={<Radio />}
+                          label="Femenino"
+                        />
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="Masculino"
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </center>
+                </div>
+                <div className="divider mt-2 mb-2" />
+              </div>
+
+              <div className="content mb-0">
+                <div className="float-start">
+                  <h2 className="mb-0">¿Padece diabetes?</h2>
+                </div>
+                <div className="clearfix" />
+                <br />
+                <div className="row">
+                  <center>
+                    <FormControl>
+                      <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                        defaultValue="0"
+                        value={value.diabetes}
+                        onChange={(e) =>
+                          setValue({
+                            ...value,
+                            diabetes: parseInt(e.target.value),
+                          })
+                        }
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
                           label="Si"
                         />
                         <FormControlLabel
-                          value="2"
+                          value="0"
                           control={<Radio />}
                           label="No"
                         />
@@ -278,11 +235,10 @@ const QuizzDiabetes = ({ titulo }) => {
                 </div>
                 <div className="divider mt-2 mb-2" />
               </div>
+
               <div className="content mb-0">
                 <div className="float-start">
-                  <h2 className="mb-0">
-                    ¿Come frutas, verduras y hortalizas a diario?
-                  </h2>
+                  <h2 className="mb-0">¿Fumas?</h2>
                 </div>
                 <div className="clearfix" />
                 <br />
@@ -294,21 +250,21 @@ const QuizzDiabetes = ({ titulo }) => {
                         aria-labelledby="demo-row-radio-buttons-group-label"
                         name="row-radio-buttons-group"
                         defaultValue="0"
-                        value={value.alimentacion}
+                        value={value.fumas}
                         onChange={(e) =>
                           setValue({
                             ...value,
-                            alimentacion: parseInt(e.target.value),
+                            fumas: parseInt(e.target.value),
                           })
                         }
                       >
                         <FormControlLabel
-                          value="0"
+                          value="1"
                           control={<Radio />}
                           label="Si"
                         />
                         <FormControlLabel
-                          value="1"
+                          value="0"
                           control={<Radio />}
                           label="No"
                         />
@@ -318,6 +274,7 @@ const QuizzDiabetes = ({ titulo }) => {
                 </div>
                 <div className="divider mt-2 mb-2" />
               </div>
+
               <div className="content mb-0">
                 <div className="float-start">
                   <h2 className="mb-0">
@@ -343,7 +300,7 @@ const QuizzDiabetes = ({ titulo }) => {
                         }
                       >
                         <FormControlLabel
-                          value="2"
+                          value="1"
                           control={<Radio />}
                           label="Si"
                         />
@@ -358,6 +315,7 @@ const QuizzDiabetes = ({ titulo }) => {
                 </div>
                 <div className="divider mt-2 mb-2" />
               </div>
+
               <div className="content mb-0">
                 <div className="float-start">
                   <h2 className="mb-0">
@@ -384,7 +342,7 @@ const QuizzDiabetes = ({ titulo }) => {
                         }
                       >
                         <FormControlLabel
-                          value="5"
+                          value="1"
                           control={<Radio />}
                           label="Si"
                         />
@@ -399,11 +357,10 @@ const QuizzDiabetes = ({ titulo }) => {
                 </div>
                 <div className="divider mt-2 mb-2" />
               </div>
+
               <div className="content mb-0">
                 <div className="float-start">
-                  <h2 className="mb-0">
-                    ¿Ha sabido algún diagnóstico de diabetes en su familia
-                  </h2>
+                  <h2 className="mb-0">¿Tiene el colesterol elevado?</h2>
                 </div>
                 <div className="clearfix" />
                 <br />
@@ -415,23 +372,18 @@ const QuizzDiabetes = ({ titulo }) => {
                         aria-labelledby="demo-row-radio-buttons-group-label"
                         name="row-radio-buttons-group"
                         defaultValue="0"
-                        value={value.familiar}
+                        value={value.colesterol}
                         onChange={(e) =>
                           setValue({
                             ...value,
-                            familiar: parseInt(e.target.value),
+                            colesterol: parseInt(e.target.value),
                           })
                         }
                       >
                         <FormControlLabel
-                          value="5"
+                          value="1"
                           control={<Radio />}
-                          label="Si (padres, hermanos o hijos)"
-                        />
-                        <FormControlLabel
-                          value="3"
-                          control={<Radio />}
-                          label="Si (abuelos, tíos, primos)"
+                          label="Si"
                         />
                         <FormControlLabel
                           value="0"
@@ -442,9 +394,16 @@ const QuizzDiabetes = ({ titulo }) => {
                     </FormControl>
                   </center>
                 </div>
-                <div className="divider mt-2 mb-2" />
+                {/* <div className="divider mt-2 mb-2" /> */}
+              </div>
+
+              <div className="content mb-0">
                 <center>
-                  <Button variant="outlined" href="#" onClick={() => calcular()}>
+                  <Button
+                    variant="outlined"
+                    href="#"
+                    onClick={() => calcular()}
+                  >
                     Calcular
                   </Button>
                 </center>
@@ -458,32 +417,28 @@ const QuizzDiabetes = ({ titulo }) => {
     </>
   );
 };
-export default QuizzDiabetes;
+export default QuizzCardiovascular;
 
 const Resultado = ({ puntaje }) => {
   // console.log(puntaje);
   const [color, setColor] = useState("black");
   const [mensaje, setMensaje] = useState("");
   useEffect(() => {
-    if (puntaje < 7) {
+    if (puntaje >= 0 && puntaje <= 2) {
       setColor("#21FF28");
-      setMensaje("Riesgo bajo");
+      setMensaje("Tienes un riesgo bajo");
     }
-    if (puntaje >= 7 && puntaje <= 11) {
+    if (puntaje >= 3 && puntaje <= 4) {
       setColor("#ABCB07");
-      setMensaje("Riesgo ligeramente elevado");
+      setMensaje("Tienes un riesgo moderado");
     }
-    if (puntaje >= 12 && puntaje <= 14) {
+    if (puntaje >= 5 && puntaje <= 8) {
       setColor("#FFE221");
-      setMensaje("Riesgo moderado");
+      setMensaje("Tienes un riesgo alto");
     }
-    if (puntaje >= 15 && puntaje <= 20) {
-      setColor("#FC7419");
-      setMensaje("Riesgo moderado");
-    }
-    if (puntaje > 20) {
+    if (puntaje > 8) {
       setColor("#FC1919");
-      setMensaje("Riesgo alto");
+      setMensaje("Tienes un riesgo muy alto");
     }
   }, []);
   return (
@@ -492,7 +447,7 @@ const Resultado = ({ puntaje }) => {
       <div className="page-content header-clear-medium">
         <div class="card card-style">
           <div class="content">
-            <h1>Resultado cuestionario Diabetes</h1>
+            <h1>Resultado cuestionario Cardiovascular</h1>
             <p />
             <p class="font-12 mt-n3 pt-1 mb-2" style={{ color: color }}>
               {mensaje}
@@ -529,28 +484,32 @@ const Resultado = ({ puntaje }) => {
             <div className="card-overlay bg-gradient rounded-0" />
           </div>
           <div className="content">
-            <p style={{ marginBottom: "0px" }}>Clínica de especialidades e investigación</p>
-            <a href="https://www.google.com/maps/dir//osmo+oaxaca/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x85c7223bbe3d113f:0xcfe9ff036942d7f3?sa=X&ved=2ahUKEwi2xbCZ4eH3AhU3IEQIHSbKBp8Q9Rd6BAhbEAU" className="color-theme font-12">
+            <p style={{ marginBottom: "0px" }}>
+              Clínica de especialidades e investigación
+            </p>
+            <a
+              href="https://www.google.com/maps/dir//osmo+oaxaca/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x85c7223bbe3d113f:0xcfe9ff036942d7f3?sa=X&ved=2ahUKEwi2xbCZ4eH3AhU3IEQIHSbKBp8Q9Rd6BAhbEAU"
+              className="color-theme font-12"
+            >
               <i>
                 <FontAwesomeIcon icon={faLocationDot} />
-              </i>
-              {" "}Ubicacion:{" "}
+              </i>{" "}
+              Ubicacion:{" "}
               <span className="color-highlight">Humboldt 302, Centro</span>
             </a>
             <br />
             <a href="#" className="color-theme font-12">
-            <i>
+              <i>
                 <FontAwesomeIcon icon={faMoneyBillWave} />
-              </i>
-              {" "}Precio:{" "}
-              <span className="color-highlight">$ 0.0</span>
+              </i>{" "}
+              Precio: <span className="color-highlight">$ 0.0</span>
             </a>
             <br />
             <a href="#" className="color-theme font-12">
-            <i>
+              <i>
                 <FontAwesomeIcon icon={faClock} />
-              </i>
-              {" "}Horario:{" "}
+              </i>{" "}
+              Horario:{" "}
               <span className="color-highlight">
                 Lunes a Vieres 9:00 - 20:00
               </span>
@@ -576,28 +535,32 @@ const Resultado = ({ puntaje }) => {
             <div className="card-overlay bg-gradient rounded-0" />
           </div>
           <div className="content">
-            <p style={{ marginBottom: "0px" }}>Clínica de especialidades e investigación</p>
-            <a href="https://www.google.com/maps/dir//osmo+oaxaca/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x85c7223bbe3d113f:0xcfe9ff036942d7f3?sa=X&ved=2ahUKEwi2xbCZ4eH3AhU3IEQIHSbKBp8Q9Rd6BAhbEAU" className="color-theme font-12">
+            <p style={{ marginBottom: "0px" }}>
+              Clínica de especialidades e investigación
+            </p>
+            <a
+              href="https://www.google.com/maps/dir//osmo+oaxaca/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x85c7223bbe3d113f:0xcfe9ff036942d7f3?sa=X&ved=2ahUKEwi2xbCZ4eH3AhU3IEQIHSbKBp8Q9Rd6BAhbEAU"
+              className="color-theme font-12"
+            >
               <i>
                 <FontAwesomeIcon icon={faLocationDot} />
-              </i>
-              {" "}Ubicacion:{" "}
+              </i>{" "}
+              Ubicacion:{" "}
               <span className="color-highlight">Humboldt 302, Centro</span>
             </a>
             <br />
             <a href="#" className="color-theme font-12">
-            <i>
+              <i>
                 <FontAwesomeIcon icon={faMoneyBillWave} />
-              </i>
-              {" "}Precio:{" "}
-              <span className="color-highlight">$ 0.0</span>
+              </i>{" "}
+              Precio: <span className="color-highlight">$ 0.0</span>
             </a>
             <br />
             <a href="#" className="color-theme font-12">
-            <i>
+              <i>
                 <FontAwesomeIcon icon={faClock} />
-              </i>
-              {" "}Horario:{" "}
+              </i>{" "}
+              Horario:{" "}
               <span className="color-highlight">
                 Lunes a Vieres 9:00 - 20:00
               </span>

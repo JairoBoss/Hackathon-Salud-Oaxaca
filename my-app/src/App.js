@@ -10,6 +10,10 @@ import AddEnfermedad from "./components/private/AddEnfermedad"
 import Perfil from "./components/private/Perfil"
 import Examenes from "./components/public/quizzes";
 import QuizzDiabetes from "./components/public/quizzes/quizzDiabetes";
+import QuizzHipertencion from "./components/public/quizzes/quizzHipertencion";
+import QuizzTabaquismo from "./components/public/quizzes/quizzTabaquismo";
+import QuizzCardiovascular from "./components/public/quizzes/quizzCardiovascular";
+import QuizzCovid from "./components/public/quizzes/quizzCovid";
 
 function App() {
   const publicRoutes = (
@@ -29,6 +33,10 @@ function App() {
       <Route path="/diario" element={<div>Diario</div>} />
       <Route path="/examenes" element={<Examenes/>} />
       <Route path="/examen/diabetes" element={<QuizzDiabetes/>} />
+      <Route path="/examen/presion-arterial" element={<QuizzHipertencion/>} />
+      <Route path="/examen/indice-tabaquismo" element={<QuizzTabaquismo/>} />
+      <Route path="/examen/riesgo-cardiovascular" element={<QuizzCardiovascular/>} />
+      <Route path="/examen/test-covid" element={<QuizzCovid/>} />
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
       <Route path="tratamiento" element={<div>Tratamiento</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
