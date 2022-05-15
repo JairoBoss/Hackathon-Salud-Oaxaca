@@ -12,7 +12,7 @@ const PrivateFooter = () => {
   return (
     <div id="page" data-swup={0} className="device-is-ios">
       <div id="footer-bar" className="footer-bar-1">
-        <a href="/" className="active-nav">
+        <a href="/perfil" className="active-nav">
           <i>
             <FontAwesomeIcon icon={faUser} />
           </i>

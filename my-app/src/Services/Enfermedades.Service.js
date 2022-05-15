@@ -1,10 +1,10 @@
 import httpClient from "./HttpClient";
 
-const prefix = "/usuario";
+const prefix = "/enfermedad";
 
-export default class UserService {
-  static async register(user) {
-    return (await httpClient.post(`${prefix}/`, user)).data;
+export default class DiseaseService {
+  static async register(enfermedad) {
+    return (await httpClient.post(`${prefix}/`, enfermedad)).data;
   }
 
   static async create(user) {
@@ -17,10 +17,6 @@ export default class UserService {
 
   static async remove(id) {
     return (await httpClient.delete(`${prefix}/${id}`)).data;
-  }
-
-  static async login(user) {
-    return (await httpClient.post(`${prefix}/login`, user)).data;
   }
 
   static async getAll() {

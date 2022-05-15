@@ -1,8 +1,8 @@
 import httpClient from "./HttpClient";
 
-const prefix = "/usuario";
+const prefix = "/perfil-medico";
 
-export default class UserService {
+export default class PerfilMedicoService {
   static async register(user) {
     return (await httpClient.post(`${prefix}/`, user)).data;
   }
@@ -11,16 +11,12 @@ export default class UserService {
     return (await httpClient.post(`${prefix}`, user)).data;
   }
 
-  static async update(user) {
-    return (await httpClient.put(`${prefix}/${user.id}`, user)).data;
+  static async update(id,user) {
+    return (await httpClient.put(`${prefix}/${id}`, user)).data;
   }
 
   static async remove(id) {
     return (await httpClient.delete(`${prefix}/${id}`)).data;
-  }
-
-  static async login(user) {
-    return (await httpClient.post(`${prefix}/login`, user)).data;
   }
 
   static async getAll() {
@@ -29,5 +25,9 @@ export default class UserService {
 
   static async get(id) {
     return (await httpClient.get(`${prefix}/${id}`)).data;
+  }
+
+  static async getByUserId(id) {
+    return (await httpClient.get(`${prefix}/usuario/${id}`)).data;
   }
 }

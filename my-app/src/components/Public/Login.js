@@ -17,8 +17,8 @@ const Login = () => {
   const iniciarSesion = async () => {
     if (email && pwd) {
       const data = {
-        pwd: pwd,
-        email: email,
+        Contraseña: pwd,
+        Correo: email,
       };
       try {
         setLoading(true);
