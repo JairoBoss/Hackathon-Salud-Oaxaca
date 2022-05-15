@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,6 +22,7 @@ import {
 } from "../../validations/validations";
 import Header from "../../components/Header";
 import UserService from "../../services/User.Service";
+import { AuthContext } from "../../context/AuthContext";
 
 const Register = () => {
   const [donador, setDonador] = useState(false);
@@ -31,6 +32,7 @@ const Register = () => {
 
   const tiposSangre = ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"];
   const [arrAlergias, setArrAlergias] = useState([]);
+  const { login } = useContext(AuthContext);
 
   const agregarAlergia = () => {
     let inputAl = document.getElementById("alergies");
@@ -60,7 +62,7 @@ const Register = () => {
             Sexo: "",
             Telefono: "",
             Correo: "",
-            password: "",
+            Contraseña: "",
             Direccion: "",
             Fecha_Nacimiento: "",
             Lugar_Nacimiento: "",
@@ -73,9 +75,14 @@ const Register = () => {
           }}
           onSubmit={(values) => {
             values.Alergias = arrAlergias;
+            console.log(values);
             UserService.create(values)
-              .then(() => {})
-              .catch(() => {});
+              .then((response) => {
+                login(response.usuarioNuevo, response.token);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           }}
         >
           {({ errors, touched }) => (
@@ -237,14 +244,14 @@ const Register = () => {
                       <FontAwesomeIcon icon={faLockOpen} fontSize={12} />
                     </i>
                     <Field
-                      name="password"
+                      name="Contraseña"
                       className="form-control"
                       validate={isEmpty}
                     />
                     <label
-                      htmlFor="password"
+                      htmlFor="Contraseña"
                       className={
-                        errors.password && touched.password
+                        errors.Contraseña && touched.Contraseña
                           ? "color-red-dark font-13"
                           : "color-blue-dark font-13"
                       }
@@ -261,23 +268,6 @@ const Register = () => {
                     <p className="mb-4">
                       Atenci&oacute;n personalizada, s&oacute;lo para ti
                     </p>
-                  </div>
-                  <div className="form-check icon-check mb-4">
-                    <Field
-                      className="form-check-input"
-                      type="checkbox"
-                      name="Donador"
-                      id="donatorCheck"
-                    />
-                    <label className="form-check-label" htmlFor="donatorCheck">
-                      He sido donador de &oacute;rganos
-                    </label>
-                    <i className="icon-check-1 color-gray-dark">
-                      <FontAwesomeIcon icon={faSquare} fontSize={15} />
-                    </i>
-                    <i className="icon-check-2 color-highlight">
-                      <FontAwesomeIcon icon={faCheckSquare} fontSize={15} />
-                    </i>
                   </div>
 
                   <div className="input-style input-style-always-active has-borders">
@@ -355,6 +345,23 @@ const Register = () => {
                       })}
                     </Field>
                     <label htmlFor="Tipo_Sangre">Tipo de sangre *</label>
+                  </div>
+                  <div className="form-check icon-check mb-4">
+                    <Field
+                      className="form-check-input"
+                      type="checkbox"
+                      name="Donador"
+                      id="donatorCheck"
+                    />
+                    <label className="form-check-label" htmlFor="donatorCheck">
+                      He sido donador de &oacute;rganos
+                    </label>
+                    <i className="icon-check-1 color-gray-dark">
+                      <FontAwesomeIcon icon={faSquare} fontSize={15} />
+                    </i>
+                    <i className="icon-check-2 color-highlight">
+                      <FontAwesomeIcon icon={faCheckSquare} fontSize={15} />
+                    </i>
                   </div>
                   <div className="input-style input-style-always-active has-borders">
                     <input className="form-control mb-2" id="alergies" />

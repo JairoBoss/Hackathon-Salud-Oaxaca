@@ -1,8 +1,9 @@
 import httpClient from "./HttpClient";
 
-const prefix = "/usuario";
+const prefix = "/usuario/";
 
-export default class UserService {  
+export default class UserService {
+  
   static async create(user) {
     return (await httpClient.post(`${prefix}`, user)).data;
   }

@@ -17,7 +17,7 @@ exports.create = async (req, res) => {
     Nombre: req.body.Nombre,
     Apellido_Paterno: req.body.Apellido_Paterno,
     Apellido_Materno: req.body.Apellido_Materno,
-    Direccion: req.body.Direccion,
+    Imagen: req.body.Imagen,
     Sexo: req.body.Sexo,
     Telefono: req.body.Telefono,
     Fecha_Nacimiento: req.body.Fecha_Nacimiento,
@@ -52,8 +52,11 @@ exports.create = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  Usuario.findOne({ correo: req.body.Correo }, async (err, user) => {
-    console.log(user);
+  Usuario.findOne({ Correo: req.body.Correo }, async (err, user) => {
+    // console.log(user);
+    // console.log("");
+    // console.log("");
+    // console.log(req.body);
     if (err) {
       console.log(err);
     } else {

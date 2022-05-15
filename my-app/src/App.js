@@ -1,17 +1,20 @@
 import "./App.css";
+import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import PublicLayout from "./components/public/PublicLayout";
 import PrivateLayout from "./components/private/PrivateLayout";
 import Login from "./components/public/Login";
-import Perfil from "./components/private/Perfil";
-import AddEnfermedad from "./components/private/AddEnfermedad";
 import Register from "./pages/public/Register";
-import Examenes from "./components/private/Examenes";
+import AddEnfermedad from "./components/private/AddEnfermedad";
+import Perfil from "./components/private/Perfil";
+// import Examenes from "./components/public/quizzes";
+import Examenes from "./components/private/Examenes"
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { currentUser, checkUser } = useContext(AuthContext);
 
-  
   const publicRoutes = (
     <Route element={<PublicLayout />}>
       <Route index path="/" element={<Login />} />
@@ -25,8 +28,8 @@ function App() {
       <Route index path="/" element={<div>Inicio</div>} />
       <Route index path="/agregarEnfermedad" element={<AddEnfermedad />} />
       <Route path="/perfil" element={<Perfil />} />
-      <Route path="/diario" element={<div>Diario</div>} />
-      <Route path="/examenes" element={<Examenes/>} />
+      <Route path="/diario" element={<div>Diario</div>} />      
+      <Route path="/examenes" element={<Examenes />} />
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
       <Route path="tratamiento" element={<div>Tratamiento</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
@@ -35,10 +38,13 @@ function App() {
   );
 
   const getRoutes = () => {
-    const currentUser = localStorage.getItem("currentUser");
     if (currentUser) return userRoutes;
     return publicRoutes;
   };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
 
   return (
     <BrowserRouter>

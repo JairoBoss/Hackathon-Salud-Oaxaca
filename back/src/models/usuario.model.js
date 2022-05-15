@@ -22,7 +22,7 @@ const UsuarioSchema = mongoose.Schema({
   Apellido_Materno: {
     type: String
   },
-  Direccion: {
+  Imagen: {
     type: String
   },
   Sexo: {

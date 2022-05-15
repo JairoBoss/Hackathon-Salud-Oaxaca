@@ -1,7 +1,6 @@
 // back/node_modules/whatwg-url/lib/encoding.js
 // https://stackoverflow.com/questions/69187442/const-utf8encoder-new-textencoder-in-node-js
 
-
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -34,10 +33,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 8080;
 var corsOptions = {
-  origin: `http://localhost:3000`,
+  origin: "http://localhost:3000",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
 };
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
