@@ -237,7 +237,7 @@ const QuimicaSanguinea = () => {
                                             src={URL.createObjectURL(file)}
                                             style={{
                                                 height: 200,
-                                                width: 200,
+                                                width: "100%",
                                                 objectFit: "contain",
                                             }}
                                         />
