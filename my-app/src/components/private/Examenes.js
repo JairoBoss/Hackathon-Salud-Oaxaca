@@ -5,7 +5,7 @@ import EGO from "./examenes/EGO";
 import { Formik, Form, Field } from "formik";
 import { useState, useEffect } from "react";
 
-const Examenes = () => {
+const Estudios = () => {
     const [pantalla, setPantalla] = useState(0);
     const forms = [<BiometriaHematica />, <QuimicaSanguinea />, <EGO/>];
 
@@ -51,4 +51,4 @@ const Examenes = () => {
 
 }
 
-export default Examenes;
+export default Estudios;

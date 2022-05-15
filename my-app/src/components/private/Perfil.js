@@ -27,10 +27,13 @@ const Perfil = () => {
 
   useEffect(() => {
     loadProfile();
+        
   }, []);
 
   const loadProfile = async () => {
-    const UserResponse = await UserService.get("628028d16b19388ded66f6be");
+    let user = localStorage.getItem("currentUser");    
+    let userJson = JSON.parse(user);
+    const UserResponse = await UserService.get(userJson._id);
     setUser(UserResponse);
     let imc =
       UserResponse.Peso /

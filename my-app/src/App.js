@@ -9,10 +9,11 @@ import Register from "./pages/public/Register";
 import AddEnfermedad from "./components/private/AddEnfermedad";
 import Perfil from "./components/private/Perfil";
 // import Examenes from "./components/public/quizzes";
-import Examenes from "./components/private/Examenes";
+import Estudios from "./components/private/Examenes";
 import { AuthContext } from "./context/AuthContext";
 import Diario from "./components/private/Diario";
 import AgregarDiario from "./components/private/AgregarDiario";
+import Examenes from "./components/public/quizzes/index";
 
 function App() {
   const { currentUser, checkUser } = useContext(AuthContext);
@@ -30,7 +31,8 @@ function App() {
       <Route index path="/" element={<Perfil />} />
       <Route path="/enfermedades" element={<AddEnfermedad />} />
       <Route path="/diario" element={<Diario/>} />
-      <Route path="/agregarDiario" element={<AgregarDiario/>} />
+      <Route path="/agregarDiario" element={<AgregarDiario/>} />      
+      <Route path="/estudios" element={<Estudios />} />
       <Route path="/examenes" element={<Examenes />} />
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
       <Route path="tratamiento" element={<div>Tratamiento</div>} />
