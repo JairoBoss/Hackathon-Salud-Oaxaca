@@ -11,8 +11,7 @@ import Perfil from "./components/private/Perfil";
 // import Examenes from "./components/public/quizzes";
 import Examenes from "./components/private/Examenes";
 import { AuthContext } from "./context/AuthContext";
-import Diario from "./components/private/Diario";
-import AgregarDiario from "./components/private/AgregarDiario";
+import EditProfile from "./pages/public/EditProfile";
 
 function App() {
   const { currentUser, checkUser } = useContext(AuthContext);
@@ -29,13 +28,12 @@ function App() {
     <Route element={<PrivateLayout />}>
       <Route index path="/" element={<Perfil />} />
       <Route path="/enfermedades" element={<AddEnfermedad />} />
-      <Route path="/diario" element={<Diario/>} />
-      <Route path="/agregarDiario" element={<AgregarDiario/>} />
+      <Route path="/editar-perfil" element={<EditProfile />} />
+      <Route path="/diario" element={<div>Diario</div>} />
       <Route path="/examenes" element={<Examenes />} />
       <Route path="recomendaciones" element={<div>Recomendaciones</div>} />
       <Route path="tratamiento" element={<div>Tratamiento</div>} />
       <Route path="*" element={<div>No encontrada</div>} />
-      {/* Por si no existe la ruta */}
     </Route>
   );
 

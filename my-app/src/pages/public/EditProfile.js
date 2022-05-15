@@ -19,20 +19,22 @@ import {
   isPositiveNumber,
   isValidEmail,
   isValidPhone,
+  isValidURL,
 } from "../../validations/validations";
 import Header from "../../components/Header";
 import UserService from "../../services/User.Service";
 import { AuthContext } from "../../context/AuthContext";
 
-const Register = () => {
-  const [donador, setDonador] = useState(false);
+const EditProfile = () => {
+  const { currentUser } = useContext(AuthContext);
   const [image, setImage] = useState(
-    "http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png"
+    isValidURL(currentUser.Imagen)
+      ? currentUser.Imagen
+      : "http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png"
   );
 
   const tiposSangre = ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"];
-  const [arrAlergias, setArrAlergias] = useState([]);
-  const { login } = useContext(AuthContext);
+  const [arrAlergias, setArrAlergias] = useState(currentUser.Alergias);
 
   const agregarAlergia = () => {
     let inputAl = document.getElementById("alergies");
@@ -51,33 +53,39 @@ const Register = () => {
 
   return (
     <>
-      <Header titulo={"Registrate"}></Header>
+      <Header titulo={"Editar mi perfil"}></Header>
       <div className="page-content header-clear-medium">
         <Formik
           initialValues={{
             Imagen: image,
-            Nombre: "",
-            Apellido_Paterno: "",
-            Apellido_Materno: "",
-            Sexo: "",
-            Telefono: "",
-            Correo: "",
+            Nombre: currentUser.Nombre,
+            Apellido_Paterno: currentUser.Apellido_Paterno,
+            Apellido_Materno: currentUser.Apellido_Materno,
+            Sexo: currentUser.Sexo,
+            Telefono: currentUser.Telefono,
+            Correo: currentUser.Correo,
             Contraseña: "",
-            Direccion: "",
-            Fecha_Nacimiento: "",
-            Lugar_Nacimiento: "",
-            Donador: donador,
-            Peso: 0,
-            Altura: 0,
-            Cintura: 0,
-            Tipo_Sangre: "",
-            Alergias: [],
+            Direccion: currentUser.Direccion,
+            Fecha_Nacimiento: new Date(currentUser.Fecha_Nacimiento)
+              .toISOString()
+              .split("T")[0],
+            Lugar_Nacimiento: currentUser.Lugar_Nacimiento,
+            Donador: currentUser.Donador,
+            Peso: currentUser.Peso,
+            Altura: currentUser.Altura,
+            Cintura: currentUser.Cintura,
+            Tipo_Sangre: currentUser.Tipo_Sangre,
+            Alergias: arrAlergias,
           }}
           onSubmit={(values) => {
+            values._id = currentUser._id;
             values.Alergias = arrAlergias;
-            UserService.create(values)
+            console.log(values);
+            if (!values.Contraseña) delete values["Contraseña"];
+
+            UserService.update(values)
               .then((response) => {
-                login(response.usuarioNuevo, response.token);
+                console.log(response);
               })
               .catch((error) => {
                 console.log(error);
@@ -242,20 +250,12 @@ const Register = () => {
                     <i className="fa">
                       <FontAwesomeIcon icon={faLockOpen} fontSize={12} />
                     </i>
-                    <Field
-                      name="Contraseña"
-                      className="form-control"
-                      validate={isEmpty}
-                    />
+                    <Field name="Contraseña" className="form-control" />
                     <label
                       htmlFor="Contraseña"
-                      className={
-                        errors.Contraseña && touched.Contraseña
-                          ? "color-red-dark font-13"
-                          : "color-blue-dark font-13"
-                      }
+                      className="color-blue-dark font-13"
                     >
-                      Contrase&ntilde;a *
+                      Cambiar contrase&ntilde;a
                     </label>
                   </div>
                 </div>
@@ -407,7 +407,7 @@ const Register = () => {
               <div className="content">
                 <a className="btn btn-full font-900 text-uppercase bg-green-dark btn-m rounded-sm">
                   <button type="submit" width={"100%"}>
-                    Completar registro
+                    Guardar cambios
                   </button>
                 </a>
               </div>
@@ -419,4 +419,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default EditProfile;

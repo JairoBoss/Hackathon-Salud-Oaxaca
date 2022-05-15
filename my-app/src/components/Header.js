@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faCog } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faCog,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ titulo }) => {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <div className="header header-fixed header-logo-center">
       <a href="index.html" className="header-title">
@@ -13,9 +21,17 @@ const Header = ({ titulo }) => {
           <FontAwesomeIcon icon={faHome} />
         </i>
       </a>
-      <a href="/" data-toggle-theme="" className="header-icon header-icon-4">
+      <a
+        type="button"
+        data-toggle-theme=""
+        onClick={() => {
+          logout();
+          navigate("/");
+        }}
+        className="header-icon header-icon-4"
+      >
         <i className="fas">
-          <FontAwesomeIcon icon={faCog} />
+          <FontAwesomeIcon icon={faRightFromBracket} />
         </i>
       </a>
     </div>
