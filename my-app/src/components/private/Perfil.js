@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import UserService from "../../services/User.Service";
 import PerfilMedicoService from "../../services/PerfilMedico.Service";
 import DiseaseService from "../../services/Enfermedades.Service";
@@ -16,6 +16,7 @@ import {
 import Header from "../Header";
 import NoImage from "../../images/no-image-user.png";
 import { isValidURL } from "../../validations/validations";
+import { AuthContext } from "../../context/AuthContext";
 
 const Perfil = () => {
   const [IMC, setIMC] = useState(0.0);
@@ -24,6 +25,7 @@ const Perfil = () => {
   const [icon, setIcon] = useState(faCircleExclamation);
   const [perfil, setPerfil] = useState("");
   const [user, setUser] = useState("");
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     loadProfile();
@@ -41,7 +43,7 @@ const Perfil = () => {
     setIMC(imc);
     divReturn(imc);
     const ProfileResponse = await PerfilMedicoService.getByUserId(
-      UserResponse._id
+      currentUser._id
     );
 
     setPerfil(ProfileResponse[0]);
@@ -49,19 +51,19 @@ const Perfil = () => {
 
   function divReturn(imc) {
     if (imc < 18.5) {
-      setColor("#A7EA20");
+      setColor("#008000");
       setText("Peso bajo");
       setIcon(faSquareCheck);
     } else if (imc >= 18.5 && imc <= 24.9) {
-      setColor("#A7EA20");
+      setColor("#718000");
       setText("Peso normal");
       setIcon(faSquareCheck);
     } else if (imc >= 25 && imc <= 29.9) {
-      setColor("#DCEA20");
+      setColor("#ffeb80");
       setText("Sobrepeso");
       setIcon(faExclamation);
     } else if (imc >= 30 && imc <= 34.9) {
-      setColor("#FCFF00");
+      setColor("#f08f00");
       setText("Obesidad leve");
       setIcon(faExclamation);
     } else if (imc >= 35 && imc <= 35.9) {
@@ -89,7 +91,7 @@ const Perfil = () => {
                 <p className="mb-0 pb-1 pe-3">Correo: {user.Correo}</p>
                 <p className="mb-0 pb-1 pe-3">Teléfono: {user.Telefono}</p>
                 <p className="mb-0 pb-1 pe-3">
-                  Tipo de sange: {user.Tipo_Sangre}
+                  Tipo de sangre: {user.Tipo_Sangre}
                 </p>
               </div>
             </div>
