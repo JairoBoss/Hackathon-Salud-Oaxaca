@@ -1,12 +1,14 @@
 import { SetStateAction, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../context/AuthContext";
 import UserService from "../../services/User.Service";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [loading, setLoading] = useState(false);
+  const { login } = useContext(AuthContext);
   let navigate = useNavigate();
 
   require("./Login.css");
@@ -27,8 +29,7 @@ const Login = () => {
             console.log(response);
             toast.error("Error al intentar ingresar, revise sus credenciales");
           } else {
-            localStorage.setItem("currentUser", JSON.stringify(response.user));
-            localStorage.setItem("token", response.token);
+            login(response.user, response.token);
             toast.success("Bienvenid@ " + response.user.nombre);
             navigate("/");
           }

@@ -4,12 +4,15 @@ import Layout from "./components/Layout";
 import PublicLayout from "./components/public/PublicLayout";
 import PrivateLayout from "./components/private/PrivateLayout";
 import Login from "./components/public/Login";
-import Register from "./pages/Public/Register";
-// import Form1 from "./pages/Public/Register/Form1";
-import AddEnfermedad from "./components/private/AddEnfermedad"
-import Perfil from "./components/private/Perfil"
+import Perfil from "./components/private/Perfil";
+import AddEnfermedad from "./components/private/AddEnfermedad";
+import Register from "./pages/public/Register";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { currentUser, checkUser } = useContext(AuthContext);
+
   const publicRoutes = (
     <Route element={<PublicLayout />}>
       <Route index path="/" element={<Login />} />
@@ -33,10 +36,13 @@ function App() {
   );
 
   const getRoutes = () => {
-    const currentUser = localStorage.getItem("currentUser");
     if (currentUser) return userRoutes;
     return publicRoutes;
   };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
 
   return (
     <BrowserRouter>
