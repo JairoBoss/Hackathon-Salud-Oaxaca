@@ -34,15 +34,22 @@ exports.create = async (req, res) => {
 
 exports.findAll = (req, res) => {
   PerfilMedico.find()
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message ||
-          "Ocurrio un error al tratar de recuperar todos los perfiles medicos.",
-      });
+    .populate("Enfermedades")
+    .populate("Medicamentos")
+    .populate("Documentos")
+    .populate("Examenes")
+    .populate("Eventos")
+    .exec((err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send({
+          message:
+            err.message ||
+            `Ocurrio un error al tratar de recuperar la adopcion`,
+        });
+      } else {
+        res.status(200).send(data);
+      }
     });
 };
 
@@ -113,7 +120,7 @@ exports.delete = (req, res) => {
 };
 
 exports.findByUserId = (req, res) => {
-  PerfilMedico.find({Usuario: req.params.id})
+  PerfilMedico.find({ Usuario: req.params.id })
     .then((data) => {
       if (!data) {
         return res.status(404).send({
