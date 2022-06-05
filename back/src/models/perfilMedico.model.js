@@ -17,7 +17,7 @@ var PerfilMedicoSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: "Medicamentos",
+      ref: "Medicamento",
     },
   ],
   Documentos: [
@@ -28,13 +28,13 @@ var PerfilMedicoSchema = new Schema({
   Examenes: [{
     type: Schema.Types.ObjectId,
     required: true,
-    ref: "Examenes",
+    ref: "Examen",
   }],
   Eventos: [
     {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: "Eventos",
+      ref: "Evento",
     },
   ],
   // Habito:{

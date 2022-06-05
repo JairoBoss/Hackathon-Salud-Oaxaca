@@ -35,10 +35,10 @@ exports.create = async (req, res) => {
 exports.findAll = (req, res) => {
   PerfilMedico.find()
     .populate("Enfermedades")
-    .populate("Medicamento")
-    .populate("Documento")
-    .populate("Examen")
-    .populate("Evento")
+    .populate("Medicamentos")
+    .populate("Documentos")
+    .populate("Examenes")
+    .populate("Eventos")
     .exec((err, data) => {
       if (err) {
         console.log(err);
