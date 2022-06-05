@@ -45,7 +45,7 @@ exports.findAll = (req, res) => {
         res.status(500).send({
           message:
             err.message ||
-            `Ocurrio un error al tratar de recuperar la adopcion`,
+            `Ocurrio un error al tratar de recuperar todos los expedientes medicos`,
         });
       } else {
         res.status(200).send(data);
@@ -55,45 +55,43 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   PerfilMedico.findById(req.params.id)
-    .then((data) => {
-      if (!data) {
-        return res.status(404).send({
-          message: `Perfil medico con id: ${req.params.id} no encontrado`,
+    .populate("Enfermedades")
+    .populate("Medicamentos")
+    .populate("Documentos")
+    .populate("Examenes")
+    .populate("Eventos")
+    .exec((err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send({
+          message:
+            err.message ||
+            `Ocurrio un error al tratar de recuperar la el perfil medicoco id ${req.params.id}`,
         });
+      } else {
+        res.status(200).send(data);
       }
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      if (err.kind === "ObjectId") {
-        return res.status(404).send({
-          message: `Perfil medico con id: ${req.params.id} no encontrado`,
-        });
-      }
-      return res.status(500).send({
-        message: `Error al recuperar datos del perfil medico con id: ${req.params.id}.`,
-      });
     });
 };
 
 exports.update = (req, res) => {
-  PerfilMedico.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then((data) => {
-      if (!data) {
-        return res.status(404).send({
-          message: `Perfil medico con id: ${req.params.id}, no encontrado`,
+  PerfilMedico.findByIdAndUpdate(req.params.id, req.body)
+    .populate("Enfermedades")
+    .populate("Medicamentos")
+    .populate("Documentos")
+    .populate("Examenes")
+    .populate("Eventos")
+    .exec((err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send({
+          message:
+            err.message ||
+            `Ocurrio un error al tratar de actualizar el perfil medico`,
         });
+      } else {
+        res.status(200).send(data);
       }
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      if (err.kind === "ObjectId") {
-        return res.status(404).send({
-          message: `Perfil medico con id: ${req.params.id}, no encontrado`,
-        });
-      }
-      return res.status(500).send({
-        message: `Error al actualizar el perfil medico con id: ${req.params.id}`,
-      });
     });
 };
 
@@ -121,22 +119,21 @@ exports.delete = (req, res) => {
 
 exports.findByUserId = (req, res) => {
   PerfilMedico.find({ Usuario: req.params.id })
-    .then((data) => {
-      if (!data) {
-        return res.status(404).send({
-          message: `Perfil medico con id: ${req.params.id} no encontrado`,
+    .populate("Enfermedades")
+    .populate("Medicamentos")
+    .populate("Documentos")
+    .populate("Examenes")
+    .populate("Eventos")
+    .exec((err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send({
+          message:
+            err.message ||
+            `Ocurrio un error al tratar de recuperar la el perfil medicoco del usuario con  id ${req.params.id}`,
         });
+      } else {
+        res.status(200).send(data);
       }
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      if (err.kind === "ObjectId") {
-        return res.status(404).send({
-          message: `Perfil medico con id: ${req.params.id} no encontrado`,
-        });
-      }
-      return res.status(500).send({
-        message: `Error al recuperar datos del perfil medico con id: ${req.params.id}.`,
-      });
     });
 };
