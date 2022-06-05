@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
     Documentos: req.body.Documentos,
     Examenes: req.body.Examenes,
     Eventos: req.body.Eventos,
-    Habitos: req.body.Habitos,
+    Habito: req.body.Habito,
   });
 
   perfilMedicoNuevo.save((err, perfilMedicoNuevo) => {
