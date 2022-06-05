@@ -10,7 +10,7 @@ var PerfilMedicoSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: "Enfermedades",
+      ref: "Enfermedad",
     },
   ],
   Medicamentos: [
