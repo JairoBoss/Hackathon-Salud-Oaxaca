@@ -37,11 +37,11 @@ var PerfilMedicoSchema = new Schema({
       ref: "Eventos",
     },
   ],
-  Habito:{
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: "Habito",
-  }
+  // Habito:{
+  //   type: Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: "Habito",
+  // }
 
 });
 
