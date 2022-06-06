@@ -29,65 +29,58 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    Examen.find()
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message ||
-          "Ocurrio un error al tratar de recuperar todos los examenes.",
-      });
+  Examen.find()
+    .populate("Preguntas")
+    .exec((err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send({
+          message:
+            err.message ||
+            `Ocurrio un error al tratar de recuperar todos los expedientes medicos`,
+        });
+      } else {
+        res.status(200).send(data);
+      }
     });
 };
 
 exports.findOne = (req, res) => {
-    Examen.findById(req.params.id)
-    .then((data) => {
-      if (!data) {
-        return res.status(404).send({
-          message: `Examen con id: ${req.params.id} no encontrado`,
+  Examen.findById(req.params.id)
+    .populate("Preguntas")
+    .exec((err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send({
+          message:
+            err.message ||
+            `Ocurrio un error al tratar de recuperar todos los expedientes medicos`,
         });
+      } else {
+        res.status(200).send(data);
       }
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      if (err.kind === "ObjectId") {
-        return res.status(404).send({
-          message: `Examen con id: ${req.params.id} no encontrado`,
-        });
-      }
-      return res.status(500).send({
-        message: `Error al recuperar datos del examen con id: ${req.params.id}.`,
-      });
     });
 };
 
 exports.update = (req, res) => {
-    Examen.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then((data) => {
-      if (!data) {
-        return res.status(404).send({
-          message: `Examen con id: ${req.params.id}, no encontrado`,
+  Examen.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .populate("Preguntas")
+    .exec((err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send({
+          message:
+            err.message ||
+            `Ocurrio un error al tratar de recuperar todos los expedientes medicos`,
         });
+      } else {
+        res.status(200).send(data);
       }
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      if (err.kind === "ObjectId") {
-        return res.status(404).send({
-          message: `Examen con id: ${req.params.id}, no encontrado`,
-        });
-      }
-      return res.status(500).send({
-        message: `Error al actualizar el examen con id: ${req.params.id}`,
-      });
     });
 };
 
 exports.delete = (req, res) => {
-    Examen.findByIdAndRemove(req.params.id)
+  Examen.findByIdAndRemove(req.params.id)
     .then((data) => {
       if (!data) {
         return res.status(404).send({

@@ -10,7 +10,7 @@ var ExamenSchema = new Schema({
   Preguntas: [{
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'Preguntas'
+    ref: 'Pregunta'
   }]
 });
 
